@@ -9,6 +9,8 @@ import { AppInterceptor } from './../app-interceptor';
 import { JobListComponent } from './jobs/job-list/job-list.component';
 import { JobCardComponent } from './shared/components/job-card/job-card.component';
 import { RemoveUnderscorePipe } from './shared/pipes/remove-underscore.pipe';
+import { JobDetailsComponent } from './jobs/job-details/job-details.component';
+import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { RemoveUnderscorePipe } from './shared/pipes/remove-underscore.pipe';
     HomeComponent,
     JobListComponent,
     JobCardComponent,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    JobDetailsComponent,
+    RemoveHtmlTagsPipe
   ],
   imports: [
   BrowserModule,

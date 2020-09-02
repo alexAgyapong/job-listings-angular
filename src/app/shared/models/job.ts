@@ -41,3 +41,9 @@ export interface JobResponse {
   __CLASS__: string;
   results: Job[];
 }
+
+export interface JobRequestOptions {
+  pageSize?: number;
+  what: string;
+  where?: string;
+}

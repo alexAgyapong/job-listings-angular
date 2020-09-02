@@ -1,12 +1,13 @@
-<div class="card my-3 m-sm-3 p-3">
-  <p class="card-text">{{job?.company?.display_name}}</p>
-  <p class="card-text">{{job?.title}}</p>
+<a class="card my-3 m-sm-3 p-3 text-dark" [href]="job?.redirect_url" target="_blank" rel="noopener noreferrer" >
+  <p class="card-text">{{job?.company?.display_name|removeHtmlTags}}</p>
+  <p class="card-text">{{job?.title|removeHtmlTags}}</p>
   <span class="d-flex justify-content-between mr-1">
     <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
       {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
     </span>
     <span class="card-text">{{job?.location?.area[2] ||job?.location?.area[1]}}</span>
   </span>
-  <span class="card-text">{{job?.contract_type|titlecase}}, {{job?.contract_time|removeUnderscore}}</span>
-  <p class="card-text mt-3">{{job?.description}}</p>
-</div>
+  <span *ngIf="job.contract_time ||job.contract_type" class="card-text">{{job?.contract_type|titlecase}},
+    {{job?.contract_time|removeUnderscore}}</span>
+  <p class="card-text mt-3">{{job?.description|removeHtmlTags}}</p>
+</a>

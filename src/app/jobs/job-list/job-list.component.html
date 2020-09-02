@@ -2,7 +2,7 @@
   <div class="col-sm-3">SIDE BAR
   </div>
   <div class="col-sm-9">
-    <div  *ngFor="let job of jobs$|async">
+    <div *ngFor="let job of jobs$|async">
       <app-job-card [job]="job"></app-job-card>
     </div>
   </div>
