@@ -6,14 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppInterceptor } from './../app-interceptor';
+import { JobListComponent } from './jobs/job-list/job-list.component';
+import { JobCardComponent } from './shared/components/job-card/job-card.component';
+import { RemoveUnderscorePipe } from './shared/pipes/remove-underscore.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    JobListComponent,
+    JobCardComponent,
+    RemoveUnderscorePipe
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpClientModule,
     AppRoutingModule
   ],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
+import { JobResponse } from './../models/job';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ export class ListingsService {
 
   constructor(private http: HttpClient) { }
 
-  getListings() {
-    let options = this.appendParams();
-    const url = `${environment.baseURL}/jobs/gb/search/1`;
-    return this.http.get<any>(url, { params: options });
+  getListings(page: number = 1) {
+    const options = this.appendParams();
+    const url = `${environment.baseURL}/jobs/gb/search/${page}`;
+    return this.http.get<JobResponse>(url, { params: options });
   }
 
   public appendParams(): HttpParams {
