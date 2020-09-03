@@ -3,7 +3,7 @@
   </div>
   <div class="col-sm-9">
     <div *ngFor="let job of jobs$|async">
-      <app-job-card [job]="job"></app-job-card>
+      <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
     </div>
   </div>
 </div>

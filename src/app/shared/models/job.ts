@@ -43,7 +43,10 @@ export interface JobResponse {
 }
 
 export interface JobRequestOptions {
+  contract?: string;
   pageSize?: number;
   what: string;
   where?: string;
+  part_time?: string;
+  full_time?: string;
 }

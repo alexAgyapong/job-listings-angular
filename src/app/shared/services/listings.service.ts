@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
-import { JobResponse, JobRequestOptions } from './../models/job';
+import { JobResponse, JobRequestOptions, Job } from './../models/job';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ListingsService {
 
   constructor(private http: HttpClient) { }
 
-  getListings(req?: JobRequestOptions, page: number = 1) {
+  getListings(req?: JobRequestOptions, page: number = 1): Observable<JobResponse> {
     const options = this.appendParams(req);
     // options.set('where', req?.where);
     console.log({ options });
@@ -25,6 +26,9 @@ export class ListingsService {
       .set('app_key', environment.appKey)
       .set('what', req?.what)
       .set('where', req?.where)
+      .set('full_time', req?.full_time || '0')
+      // .set('part_time', req?.part_time || '0')
+      .set('contract', req?.contract || '0')
       .set('results_per_page', req?.pageSize?.toString());
 
     return options;

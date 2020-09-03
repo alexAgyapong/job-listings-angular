@@ -11,22 +11,54 @@ import { Job, JobRequestOptions } from 'src/app/shared/models/job';
 export class JobListComponent implements OnInit {
   resultCount: number;
   jobs$ = new Observable<Job[]>();
-
+  req: JobRequestOptions;
 
   constructor(private listingsService: ListingsService) { }
 
   ngOnInit(): void {
-    const req: JobRequestOptions = {
+    this.req = {
       what: 'Fullstack developer',
-      where:'London',
+      where: 'London',
       pageSize: 20
     };
+    this.getJobs(this.req);
+    // .subscribe(res => console.log({ res }));
+  }
+
+
+  private getJobs(req: JobRequestOptions): void {
     this.jobs$ = this.listingsService.getListings(req)
       .pipe(tap(data => this.resultCount = data.count),
         map(res => res.results),
         tap(data => console.log({ data }, 'count:', this.resultCount))
       );
-    // .subscribe(res => console.log({ res }));
   }
 
+  getSelectedFilter(filter: string): void {
+    console.log({ filter });
+    switch (filter) {
+      case 'full_time':
+        this.req.full_time = '1';
+        console.log('req', this.req);
+
+        this.getJobs(this.req);
+        break;
+      case 'part_time':
+        this.req.part_time = '1';
+        console.log('req with part time', this.req);
+
+        this.getJobs(this.req);
+        break;
+        case 'contract':
+        this.req.contract = '1';
+        console.log('req with part time', this.req);
+
+        this.getJobs(this.req);
+        break;
+
+      default:
+        break;
+    }
+
+  }
 }

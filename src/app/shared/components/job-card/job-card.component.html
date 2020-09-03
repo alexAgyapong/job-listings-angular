@@ -1,13 +1,15 @@
-<a class="card my-3 m-sm-3 p-3 text-dark" [href]="job?.redirect_url" target="_blank" rel="noopener noreferrer" >
+<div class="card my-3 m-sm-3 p-3 text-dark">
   <p class="card-text">{{job?.company?.display_name|removeHtmlTags}}</p>
-  <p class="card-text">{{job?.title|removeHtmlTags}}</p>
+  <a class="card-text pb-3"  [href]="job?.redirect_url" target="_blank" rel="noopener noreferrer">{{job?.title|removeHtmlTags}}</a>
   <span class="d-flex justify-content-between mr-1">
     <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
       {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
     </span>
     <span class="card-text">{{job?.location?.area[2] ||job?.location?.area[1]}}</span>
   </span>
-  <span *ngIf="job.contract_time ||job.contract_type" class="card-text">{{job?.contract_type|titlecase}},
-    {{job?.contract_time|removeUnderscore}}</span>
+  <span class="d-flex mt-3">
+    <span *ngIf="job.contract_type" class="card-text mr-3"><button class="btn btn-outline-secondary" (click)="getSelectedFilter(job?.contract_type)">{{job?.contract_type|titlecase}}</button></span>
+    <span *ngIf="job.contract_time" class="card-text "><button class="btn btn-outline-secondary text-capitalize" (click)="getSelectedFilter(job?.contract_time)">{{job?.contract_time|removeUnderscore}}</button></span>
+  </span>
   <p class="card-text mt-3">{{job?.description|removeHtmlTags}}</p>
-</a>
+</div>

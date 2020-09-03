@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Job } from '../../models/job';
 
 @Component({
@@ -8,6 +8,7 @@ import { Job } from '../../models/job';
 })
 export class JobCardComponent implements OnInit, OnChanges {
   @Input() job: Job;
+  @Output() filter = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
@@ -19,5 +20,10 @@ export class JobCardComponent implements OnInit, OnChanges {
 
     console.log('job', this.job);
 
+  }
+
+  public getSelectedFilter(event: string): void {
+    console.log(event);
+    this.filter.emit(event);
   }
 }
