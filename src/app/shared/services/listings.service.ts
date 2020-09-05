@@ -38,15 +38,38 @@ export class ListingsService {
   }
 
   public appendParams(req?: JobRequestOptions): HttpParams {
-    const options = new HttpParams()
-      .set('app_id', environment.appId)
-      .set('app_key', environment.appKey)
-      .set('what', req?.what)
-      .set('where', req?.where)
-      .set('full_time', req?.full_time || '0')
-      // .set('part_time', req?.part_time || '0')
-      .set('contract', req?.contract || '0')
-      .set('results_per_page', req?.pageSize?.toString());
+    const minSalary = '10000';
+    const maxSalary = '100000';
+
+    const options = new HttpParams({
+      fromObject: {
+        app_id: environment.appId,
+        app_key: environment.appKey,
+        what: req?.what,
+        where: req?.where,
+        salary_min: req?.minSalary?.toString() || minSalary,
+        salary_max: req?.maxSalary?.toString() || maxSalary,
+
+        category: req?.category || '',
+        max_days_old: req?.maxDaysOld?.toString() || '',
+        // job_type: req?.jobType?.toString() || '',
+        // permanent:req?.jobType. || '',
+        results_per_page: req?.pageSize?.toString() || ''
+      }
+    });
+    // .set('app_id', environment.appId)
+    // .set('app_key', environment.appKey)
+    // .set('what', req?.what)
+    // .set('where', req?.where)
+    // // .set('full_time', req?.full_time || '0')
+    // // .set('part_time', req?.part_time || '0')
+    // // .set('contract', req?.contract || '0')
+    // .set('min_salary', req?.minSalary?.toString())
+    // .set('max_salary', req?.maxSalary?.toString())
+    // .set('category', req?.category)
+    // .set('job_type', req?.jobType?.toString())
+    // .set('max_days_old', req?.maxDaysOld?.toString())
+    // .set('results_per_page', req?.pageSize?.toString());
 
     return options;
   }

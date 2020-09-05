@@ -42,11 +42,21 @@ export interface JobResponse {
   results: Job[];
 }
 
-export interface JobRequestOptions {
+export interface JobRequestOptions extends FilterType {
   contract?: string;
   pageSize?: number;
   what: string;
   where?: string;
   part_time?: string;
   full_time?: string;
+}
+
+export interface FilterType {
+  distance?: number;
+  minSalary?: number;
+  maxSalary?: number;
+  jobType?: number[];
+  maxDaysOld?: number;
+  category?: string;
+  location?: string;
 }

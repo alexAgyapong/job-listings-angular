@@ -35,15 +35,15 @@
     </section>
     <section class="pt-3  mb-3">
       <h6>Date posted</h6>
-      <select class="custom-select" formControlName="datePosted" (change)="onPostedDateChange($event.target.value)">
+      <select class="custom-select" formControlName="maxDaysOld">
         <option *ngFor="let item of period" [value]="item?.value">{{item?.name}}</option>
       </select>
     </section>
     <section class="pt-3">
       <h6>Categories</h6>
       <div *ngFor="let category of categories">
-        <div class="custom-control custom-checkbox pb-2">
-          <input type="checkbox" class="custom-control-input" [value]="category?.tag" [id]="category?.tag"
+        <div class="custom-control custom-radio pb-2">
+          <input type="radio" class="custom-control-input" [value]="category?.tag" [id]="category?.tag"
             formControlName="category" (change)="onCategoryChange(category?.tag)">
           <label class="custom-control-label" [attr.for]="category?.tag">{{category?.label}}</label>
         </div>

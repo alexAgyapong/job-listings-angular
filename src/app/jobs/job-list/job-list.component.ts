@@ -40,8 +40,14 @@ export class JobListComponent implements OnInit {
     this.categories$ = this.listingsService.getCategories();
   }
 
-  getAllFilters(filters:any):void{
-    console.log({filters}, 'not working ,,....');
+  getAllFilters(filters: any): void {
+    // console.log({ filters }, 'not working ,,....');
+    if (filters) {
+      let req = { ...this.req, ...filters };
+      console.log({ req }, 'in all filters');
+
+      this.getJobs(req);
+    }
   }
 
 
