@@ -31,14 +31,19 @@ export class JobListComponent implements OnInit {
   private getJobs(req: JobRequestOptions): void {
     this.jobs$ = this.listingsService.getListings(req)
       .pipe(tap(data => this.resultCount = data.count),
-        map(res => res.results),
-        tap(data => console.log({ data }, 'count:', this.resultCount))
+        map(res => res.results)
+        // tap(data => console.log({ data }, 'count:', this.resultCount))
       );
   }
 
   private getCategories(): void {
     this.categories$ = this.listingsService.getCategories();
   }
+
+  getAllFilters(filters:any):void{
+    console.log({filters}, 'not working ,,....');
+  }
+
 
   getSelectedFilter(filter: string): void {
     console.log({ filter });

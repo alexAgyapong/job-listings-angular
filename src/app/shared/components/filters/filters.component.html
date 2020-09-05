@@ -1,14 +1,16 @@
 <div class="card my-3 p-3 text-dark">
   <form [formGroup]="filterForm">
-    <section>
+    <h4>Filter your search</h4>
+    <section class="pt-3 mb-3">
       <h6>Distance</h6>
       <select class="custom-select" formControlName="distance">
         <option *ngFor="let item of distancesInKm" [value]="item?.value">{{item?.name}}</option>
       </select>
     </section>
+   <!-- <div class="pt-3"> <hr/></div> -->
     <div class="py-3">
-      <h5>Salary range</h5>
-      <section>
+      <h6>Salary range</h6>
+      <section class="pt-3">
         <h6>From</h6>
         <select class="custom-select" formControlName="minSalary">
           <option *ngFor="let item of salaries" [value]="item?.value">{{item?.name}}</option>
@@ -21,7 +23,7 @@
         </select>
       </section>
     </div>
-    <section class="pt-3">
+    <section class="pt-3 mb-3">
       <h6>Job type</h6>
       <div *ngFor="let type of jobTypes">
         <div class="custom-control custom-checkbox pb-2">
@@ -31,7 +33,7 @@
         </div>
       </div>
     </section>
-    <section class="pt-3">
+    <section class="pt-3  mb-3">
       <h6>Date posted</h6>
       <select class="custom-select" formControlName="datePosted" (change)="onPostedDateChange($event.target.value)">
         <option *ngFor="let item of period" [value]="item?.value">{{item?.name}}</option>

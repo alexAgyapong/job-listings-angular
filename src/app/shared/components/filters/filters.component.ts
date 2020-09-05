@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Category } from 'src/app/shared/models/job';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filters',
@@ -9,11 +10,18 @@ import { Category } from 'src/app/shared/models/job';
 })
 export class FiltersComponent implements OnInit, OnChanges {
   @Input() categories: Category[];
+  @Output() allFilters = new EventEmitter<any>();
   filterForm: FormGroup;
   distancesInKm: { name: string; value: number; }[];
   salaries: { name: string; value: number; }[];
   period: { name: string; value: number; }[];
   jobTypes: { name: string; value: string; }[];
+  jobTypeValues: number[] = [];
+  categoryValues: string[] = [];
+
+  get jobTypesControl(): FormControl {
+    return this.filterForm.get('jobType') as FormControl;
+  }
 
   constructor(private fb: FormBuilder) { }
 
@@ -24,11 +32,18 @@ export class FiltersComponent implements OnInit, OnChanges {
     this.getPeriod();
     this.getJobTypes();
 
-    // this.filterForm.valueChanges.subscribe(input => console.log({ input }));
+    this.filterForm.valueChanges.pipe(debounceTime(1000)).subscribe(input => {
+      if (input) {
+        const jobType = [...this.jobTypeValues];
+        const category = [...this.categoryValues];
+        const filters = { ...input, jobType, category };
+        this.allFilters.emit(filters);
+        // console.log({ input }, { jobType }, { filters });
+      }
+    });
   }
 
   ngOnChanges(): void {
-    console.log('cat in filter', this.categories);
 
   }
 
@@ -44,17 +59,30 @@ export class FiltersComponent implements OnInit, OnChanges {
     });
   }
 
-  onJobTypeChange(value: any) {
+  onJobTypeChange(value: number): void {
+    if (this.jobTypeValues.some(x => x === value)) {
+      const index = this.jobTypeValues.findIndex(x => x === value);
+      this.jobTypeValues.splice(index, 1);
+    } else {
+      this.jobTypeValues.push(value);
+    }
+    console.log('job type values', this.jobTypeValues);
+
+  }
+
+  onPostedDateChange(value: any): void {
     console.log({ value });
 
   }
 
-  onPostedDateChange(value: any) {
+  onCategoryChange(value: string): void {
     console.log({ value });
-
-  }
-  onCategoryChange(value: any) {
-    console.log({ value });
+    if (this.categoryValues.some(x => x === value)) {
+      const index = this.categoryValues.findIndex(x => x === value);
+      this.categoryValues.splice(index, 1);
+    } else {
+      this.categoryValues.push(value);
+    }
 
   }
 
@@ -65,7 +93,6 @@ export class FiltersComponent implements OnInit, OnChanges {
       result.push({ name: `${index}Km`, value: index });
     }
     this.distancesInKm = result;
-    console.log({ distances: result });
   }
 
   getSalary(): void {
