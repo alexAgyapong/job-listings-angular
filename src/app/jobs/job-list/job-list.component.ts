@@ -3,6 +3,7 @@ import { ListingsService } from 'src/app/shared/services/listings.service';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Job, JobRequestOptions, Category } from 'src/app/shared/models/job';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
@@ -13,15 +14,19 @@ export class JobListComponent implements OnInit {
   jobs$ = new Observable<Job[]>();
   req: JobRequestOptions;
   categories$: Observable<Category[]>;
+  searchForm: FormGroup;
 
-  constructor(private listingsService: ListingsService) { }
+  constructor(private listingsService: ListingsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.searchForm = this.fb.group({ what: [''], where: [''] });
     this.req = {
-      what: 'Fullstack developer',
-      where: 'London',
+      what: this.searchForm.get('what').value || 'Fullstack developer',
+      where: this.searchForm.get('where').value || 'London',
       pageSize: 20
     };
+
     this.getJobs(this.req);
     this.getCategories();
     // .subscribe(res => console.log({ res }));
@@ -40,10 +45,15 @@ export class JobListComponent implements OnInit {
     this.categories$ = this.listingsService.getCategories();
   }
 
+  searchJobs(): void {
+    const req = {...this.req, ...this.searchForm.value};
+    console.log('here in search', req);
+    this.getJobs(req);
+  }
+
   getAllFilters(filters: any): void {
-    // console.log({ filters }, 'not working ,,....');
     if (filters) {
-      let req = { ...this.req, ...filters };
+      const req = { ...this.req, ...filters };
       console.log({ req }, 'in all filters');
 
       this.getJobs(req);
