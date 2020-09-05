@@ -36,7 +36,7 @@ export class FiltersComponent implements OnInit, OnChanges {
       if (input) {
         const jobType = [...this.jobTypeValues];
         const category = [...this.categoryValues];
-        const filters = { ...input, jobType, category };
+        const filters = { ...input, jobType };
         this.allFilters.emit(filters);
         // console.log({ input }, { jobType }, { filters });
       }
@@ -53,7 +53,7 @@ export class FiltersComponent implements OnInit, OnChanges {
       minSalary: [''],
       maxSalary: [''],
       jobType: [''],
-      datePosted: [''],
+      maxDaysOld: [''],
       category: [''],
       location: ['']
     });
@@ -67,11 +67,6 @@ export class FiltersComponent implements OnInit, OnChanges {
       this.jobTypeValues.push(value);
     }
     console.log('job type values', this.jobTypeValues);
-
-  }
-
-  onPostedDateChange(value: any): void {
-    console.log({ value });
 
   }
 
