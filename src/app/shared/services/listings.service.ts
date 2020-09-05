@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
-import { JobResponse, JobRequestOptions, Job } from './../models/job';
+import { JobResponse, JobRequestOptions, Job, Category } from './../models/job';
 import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,22 @@ export class ListingsService {
 
     const url = `${environment.baseURL}/jobs/gb/search/${page}`;
     return this.http.get<JobResponse>(url, { params: options });
+  }
+
+  getCategories(): Observable<Category[]> {
+    const options = this.appendKeyParams();
+    console.log({ options });
+
+    const url = `${environment.baseURL}/jobs/gb/categories`;
+    return this.http.get<any>(url, { params: options }).pipe(map(res => res.results), tap(data => console.log({ data })));
+  }
+
+  public appendKeyParams(): HttpParams {
+    const options = new HttpParams()
+      .set('app_id', environment.appId)
+      .set('app_key', environment.appKey);
+
+    return options;
   }
 
   public appendParams(req?: JobRequestOptions): HttpParams {
