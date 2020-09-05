@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { JobCardComponent } from './shared/components/job-card/job-card.componen
 import { RemoveUnderscorePipe } from './shared/pipes/remove-underscore.pipe';
 import { JobDetailsComponent } from './jobs/job-details/job-details.component';
 import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
+import { FiltersComponent } from './shared/components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
     JobCardComponent,
     RemoveUnderscorePipe,
     JobDetailsComponent,
-    RemoveHtmlTagsPipe
+    RemoveHtmlTagsPipe,
+    FiltersComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [{

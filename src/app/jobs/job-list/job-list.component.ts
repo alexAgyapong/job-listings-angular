@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListingsService } from 'src/app/shared/services/listings.service';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Job, JobRequestOptions } from 'src/app/shared/models/job';
+import { Job, JobRequestOptions, Category } from 'src/app/shared/models/job';
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
@@ -12,6 +12,7 @@ export class JobListComponent implements OnInit {
   resultCount: number;
   jobs$ = new Observable<Job[]>();
   req: JobRequestOptions;
+  categories$: Observable<Category[]>;
 
   constructor(private listingsService: ListingsService) { }
 
@@ -22,6 +23,7 @@ export class JobListComponent implements OnInit {
       pageSize: 20
     };
     this.getJobs(this.req);
+    this.getCategories();
     // .subscribe(res => console.log({ res }));
   }
 
@@ -32,6 +34,10 @@ export class JobListComponent implements OnInit {
         map(res => res.results),
         tap(data => console.log({ data }, 'count:', this.resultCount))
       );
+  }
+
+  private getCategories(): void {
+    this.categories$ = this.listingsService.getCategories();
   }
 
   getSelectedFilter(filter: string): void {
@@ -49,7 +55,7 @@ export class JobListComponent implements OnInit {
 
         this.getJobs(this.req);
         break;
-        case 'contract':
+      case 'contract':
         this.req.contract = '1';
         console.log('req with part time', this.req);
 

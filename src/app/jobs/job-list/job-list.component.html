@@ -1,6 +1,8 @@
 <div class="row mx-auto mx-sm-5">
-  <div class="col-sm-3">SIDE BAR
+  <div class="col-sm-3 d-none d-sm-block">
+    <app-filters [categories]="categories$|async"></app-filters>
   </div>
+  <div class="d-block d-sm-none mt-3 mx-auto"><button class="btn-link btn-outline-none">Filters</button></div>
   <div class="col-sm-9">
     <div *ngFor="let job of jobs$|async">
       <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
