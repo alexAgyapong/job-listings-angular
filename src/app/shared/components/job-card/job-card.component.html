@@ -5,7 +5,7 @@
     <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
       {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
     </span>
-    <span class="card-text">{{job?.location?.area[2] ||job?.location?.area[1]}}</span>
+    <span class="card-text">{{job?.location?.display_name}}</span>
   </span>
   <span class="d-flex mt-3">
     <span *ngIf="job.contract_type" class="card-text mr-3"><button class="btn btn-outline-secondary" (click)="getSelectedFilter(job?.contract_type)">{{job?.contract_type|titlecase}}</button></span>
