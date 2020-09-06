@@ -10,7 +10,11 @@ export class AppInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = req.headers
       .set('Content-Type', 'application/json');
-    req = req.clone({ headers });
+    if (!req.url.startsWith('https://geocode.xyz')) {
+      req = req.clone({ headers });
+      console.log('her..............');
+
+    }
     return next.handle(req);
   }
 }

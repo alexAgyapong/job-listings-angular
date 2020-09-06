@@ -120,7 +120,8 @@ export class FiltersComponent implements OnInit, OnChanges {
 
   getPeriod(): void {
     this.period = [
-      { name: 'Today', value: 1 },
+      { name: 'Last 24 Hours', value: 1 },
+      { name: 'Last 3 Days', value: 3 },
       { name: 'Last Week', value: 7 },
       { name: 'Last two Weeks', value: 14 },
     ];
