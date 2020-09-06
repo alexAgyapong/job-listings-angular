@@ -41,7 +41,7 @@ export class ListingsService {
     const minSalary = '10000';
     const maxSalary = '100000';
 
-    const options = new HttpParams({
+    let options = new HttpParams({
       fromObject: {
         app_id: environment.appId,
         app_key: environment.appKey,
@@ -52,11 +52,20 @@ export class ListingsService {
 
         category: req?.category || '',
         max_days_old: req?.maxDaysOld?.toString() || '',
-        // job_type: req?.jobType?.toString() || '',
-        // permanent:req?.jobType. || '',
-        results_per_page: req?.pageSize?.toString() || ''
+        results_per_page: req?.pageSize?.toString() || '',
+        // permanent: req?.permanent || '0'
+        // contract: req?.contract || '0',
+        // full_time: req?.full_time || '0',
+        // part_time: req?.part_time || '0',
+
       }
     });
+
+    if (req.permanent) { options = options.append('permanent', req?.contract); }
+    if (req.contract) { options = options.append('contract', req?.contract); }
+    if (req.full_time) { options = options.append('full_time', req?.full_time); }
+    if (req.part_time) { options = options.append('part_time', req?.part_time); }
+
     // .set('app_id', environment.appId)
     // .set('app_key', environment.appKey)
     // .set('what', req?.what)

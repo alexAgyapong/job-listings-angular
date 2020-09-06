@@ -112,7 +112,6 @@ export class FiltersComponent implements OnInit, OnChanges {
   getJobTypes(): void {
     this.jobTypes = [
       { name: 'Permanent', value: 'permanent' },
-      { name: 'Temporary', value: 'temporary' },
       { name: 'Contract', value: 'contract' },
       { name: 'Full-Time', value: 'full_time' },
       { name: 'Part-Time', value: 'part_time' },

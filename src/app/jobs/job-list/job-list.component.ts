@@ -4,6 +4,7 @@ import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Job, JobRequestOptions, Category } from 'src/app/shared/models/job';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FilterType } from './../../shared/models/job';
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
@@ -46,18 +47,28 @@ export class JobListComponent implements OnInit {
   }
 
   searchJobs(): void {
-    const req = {...this.req, ...this.searchForm.value};
+    const req = { ...this.req, ...this.searchForm.value };
     console.log('here in search', req);
     this.getJobs(req);
   }
 
   getAllFilters(filters: any): void {
     if (filters) {
-      const req = { ...this.req, ...filters };
+      let req = { ...this.req, ...filters } as JobRequestOptions;
+      this.getJobTypeParams(filters.jobType, req);
       console.log({ req }, 'in all filters');
 
       this.getJobs(req);
     }
+  }
+
+  getJobTypeParams(types: string[], req: JobRequestOptions): void {
+    types.forEach(x => {
+      if (x === 'permanent') { req.permanent = '1'; }
+      if (x === 'contract') { req.contract = '1'; }
+      if (x === 'full_time') { req.full_time = '1'; }
+      if (x === 'part_time') { req.part_time = '1'; }
+    });
   }
 
 

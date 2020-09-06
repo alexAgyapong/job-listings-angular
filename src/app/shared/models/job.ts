@@ -43,12 +43,13 @@ export interface JobResponse {
 }
 
 export interface JobRequestOptions extends FilterType {
-  contract?: string;
-  pageSize?: number;
   what: string;
   where?: string;
+  permanent?: string;
+  contract?: string;
   part_time?: string;
   full_time?: string;
+  pageSize?: number;
 }
 
 export interface FilterType {
