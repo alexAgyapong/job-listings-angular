@@ -43,7 +43,7 @@ export interface JobResponse {
 }
 
 export interface JobRequestOptions extends FilterType {
-  what: string;
+  what?: string;
   where?: string;
   permanent?: string;
   contract?: string;

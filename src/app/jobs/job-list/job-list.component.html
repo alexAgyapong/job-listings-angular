@@ -1,27 +1,14 @@
-<div class="row mx-auto mx-sm-5">
-  <div class="col-sm-12 my-3">
-    <form [formGroup]="searchForm" (ngSubmit)="searchJobs()">
-      <div class="form-row">
-        <div class="form-group col-sm-4">
-          <label for="what">What</label>
-          <input class="form-control" type="text" id="what" formControlName="what">
-        </div>
-        <div class="form-group col-sm-4">
-          <label for="where">Where</label>
-          <input class="form-control" type="text" id="where" formControlName="where">
-        </div>
-        <div class="col-sm-2 mt-4 pt-2"><button class="btn btn-primary btn-block" type="submit">Search</button>
-        </div>
+<div class="container">
+  <app-search></app-search>
+  <div class="row">
+    <div class="col-sm-3 d-none d-sm-block">
+      <app-filters [categories]="categories$|async" (allFilters)="getAllFilters($event)"></app-filters>
+    </div>
+    <div class="d-block d-sm-none mt-3 mx-auto"><button class="btn-link btn-outline-none">Filters</button></div>
+    <div class="col-sm-9">
+      <div *ngFor="let job of jobs$|async">
+        <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
       </div>
-    </form>
-  </div>
-  <div class="col-sm-3 d-none d-sm-block">
-    <app-filters [categories]="categories$|async" (allFilters)="getAllFilters($event)"></app-filters>
-  </div>
-  <div class="d-block d-sm-none mt-3 mx-auto"><button class="btn-link btn-outline-none">Filters</button></div>
-  <div class="col-sm-9">
-    <div *ngFor="let job of jobs$|async">
-      <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
     </div>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Job, JobRequestOptions, Category } from 'src/app/shared/models/job';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterType } from './../../shared/models/job';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
@@ -17,20 +18,28 @@ export class JobListComponent implements OnInit {
   categories$: Observable<Category[]>;
   searchForm: FormGroup;
 
-  constructor(private listingsService: ListingsService, private fb: FormBuilder) { }
+  constructor(private listingsService: ListingsService, private fb: FormBuilder, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.searchForm = this.fb.group({ what: [''], where: [''] });
-    this.req = {
-      what: this.searchForm.get('what').value || 'Fullstack developer',
-      where: this.searchForm.get('where').value || 'London',
-      pageSize: 20
-    };
+    // this.searchForm = this.fb.group({ what: [''], where: [''] });
+    // this.req = {
+    //   what: this.searchForm.get('what').value || 'Fullstack developer',
+    //   where: this.searchForm.get('where').value || 'London',
+    //   pageSize: 20
+    // };
 
-    this.getJobs(this.req);
+    this.route.queryParamMap.subscribe(params => {
+      let what = (params.get('what'));
+      let where = (params.get('where'));
+      this.req = { ...this.req, what, where };
+      console.log('in route para', this.req);
+      if (this.req) {
+        this.getJobs(this.req);
+      }
+    });
+
     this.getCategories();
-    // .subscribe(res => console.log({ res }));
   }
 
 
@@ -38,7 +47,6 @@ export class JobListComponent implements OnInit {
     this.jobs$ = this.listingsService.getListings(req)
       .pipe(tap(data => this.resultCount = data.count),
         map(res => res.results)
-        // tap(data => console.log({ data }, 'count:', this.resultCount))
       );
   }
 
@@ -46,13 +54,9 @@ export class JobListComponent implements OnInit {
     this.categories$ = this.listingsService.getCategories();
   }
 
-  searchJobs(): void {
-    const req = { ...this.req, ...this.searchForm.value };
-    console.log('here in search', req);
-    this.getJobs(req);
-  }
-
   getAllFilters(filters: any): void {
+    console.log('local req', this.req, 'filters from child', filters);
+
     if (filters) {
       let req = { ...this.req, ...filters } as JobRequestOptions;
       this.getJobTypeParams(filters.jobType, req);

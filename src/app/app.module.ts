@@ -13,6 +13,7 @@ import { RemoveUnderscorePipe } from './shared/pipes/remove-underscore.pipe';
 import { JobDetailsComponent } from './jobs/job-details/job-details.component';
 import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
 import { FiltersComponent } from './shared/components/filters/filters.component';
+import { SearchComponent } from './shared/components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FiltersComponent } from './shared/components/filters/filters.component'
     RemoveUnderscorePipe,
     JobDetailsComponent,
     RemoveHtmlTagsPipe,
-    FiltersComponent
+    FiltersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

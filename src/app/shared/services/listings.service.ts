@@ -40,6 +40,7 @@ export class ListingsService {
   public appendParams(req?: JobRequestOptions): HttpParams {
     const minSalary = '10000';
     const maxSalary = '100000';
+    const pageSize = '20';
 
     let options = new HttpParams({
       fromObject: {
@@ -52,7 +53,9 @@ export class ListingsService {
 
         category: req?.category || '',
         max_days_old: req?.maxDaysOld?.toString() || '',
-        results_per_page: req?.pageSize?.toString() || '',
+        results_per_page: req?.pageSize?.toString() || pageSize,
+
+        // distance: req?.distance?.toString() || '',
         // permanent: req?.permanent || '0'
         // contract: req?.contract || '0',
         // full_time: req?.full_time || '0',
@@ -61,6 +64,7 @@ export class ListingsService {
       }
     });
 
+    if (req.distance) { options = options.append('distance', req?.distance.toString()); }
     if (req.permanent) { options = options.append('permanent', req?.contract); }
     if (req.contract) { options = options.append('contract', req?.contract); }
     if (req.full_time) { options = options.append('full_time', req?.full_time); }
