@@ -5,12 +5,13 @@
       <app-filters [categories]="categories$|async" (allFilters)="getAllFilters($event)"></app-filters>
     </div>
     <div class="d-block d-sm-none mt-3 mx-auto"><button class="btn-link btn-outline-none">Filters</button></div>
-    <div class="col-sm-9">
+    <div class="col-sm-9" #jobs>
       <div *ngFor="let job of jobs$|async">
         <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
       </div>
       <ng-container *ngIf="resultCount">
-        <pagination class="ml-3" [totalItems]="resultCount" [itemsPerPage]="20" (pageChanged)="pageChanged($event)">
+        <pagination class="ml-3" [totalItems]="resultCount" [itemsPerPage]="20" (pageChanged)="pageChanged($event)"
+          (click)="scroll(jobs)">
         </pagination>
       </ng-container>
     </div>

@@ -111,4 +111,10 @@ export class JobListComponent implements OnInit {
     console.log({ event });
     this.getJobs(this.req, event.page);
   }
+
+  scroll(el: HTMLElement): void {
+    console.log({ el });
+
+    el.scrollIntoView();
+  }
 }
