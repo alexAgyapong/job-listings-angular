@@ -50,6 +50,7 @@ export interface JobRequestOptions extends FilterType {
   part_time?: string;
   full_time?: string;
   pageSize?: number;
+  page?: number;
 }
 
 export interface FilterType {

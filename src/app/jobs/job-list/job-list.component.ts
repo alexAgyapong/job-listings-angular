@@ -6,6 +6,9 @@ import { Job, JobRequestOptions, Category } from 'src/app/shared/models/job';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterType } from './../../shared/models/job';
 import { ActivatedRoute } from '@angular/router';
+
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+
 @Component({
   selector: 'app-job-list',
   templateUrl: './job-list.component.html',
@@ -43,8 +46,8 @@ export class JobListComponent implements OnInit {
   }
 
 
-  private getJobs(req: JobRequestOptions): void {
-    this.jobs$ = this.listingsService.getListings(req)
+  private getJobs(req: JobRequestOptions, page?: number): void {
+    this.jobs$ = this.listingsService.getListings(req, page)
       .pipe(tap(data => this.resultCount = data.count),
         map(res => res.results)
       );
@@ -102,5 +105,10 @@ export class JobListComponent implements OnInit {
         break;
     }
 
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    console.log({ event });
+    this.getJobs(this.req, event.page);
   }
 }

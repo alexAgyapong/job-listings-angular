@@ -14,6 +14,9 @@ import { JobDetailsComponent } from './jobs/job-details/job-details.component';
 import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
 import { FiltersComponent } from './shared/components/filters/filters.component';
 import { SearchComponent } from './shared/components/search/search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { SearchComponent } from './shared/components/search/search.component';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    PaginationModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true
