@@ -26,10 +26,10 @@
     <section class="pt-3 mb-3">
       <h6>Job type</h6>
       <div *ngFor="let type of jobTypes">
-        <div class="custom-control custom-checkbox pb-2">
-          <input type="checkbox" class="custom-control-input" [id]="type?.name"
-          formControlName="jobType"  (change)="onJobTypeChange(type?.value)">
-          <label class="custom-control-label" [attr.for]="type?.name">{{type?.name}}</label>
+        <div class="custom-control custom-radio pb-2">
+          <input type="radio" class="custom-control-input" [value]="type?.value"  [id]="type?.value"
+          formControlName="jobType"  >
+          <label class="custom-control-label" [attr.for]="type?.value">{{type?.name}}</label>
         </div>
       </div>
     </section>

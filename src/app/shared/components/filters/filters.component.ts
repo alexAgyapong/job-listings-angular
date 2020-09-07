@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Category } from 'src/app/shared/models/job';
 import { debounceTime } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class FiltersComponent implements OnInit, OnChanges {
   salaries: { name: string; value: number; }[];
   period: { name: string; value: number; }[];
   jobTypes: { name: string; value: string; }[];
+  jobType: { name: string; value: string; };
   jobTypeValues: number[] = [];
   categoryValues: string[] = [];
 
@@ -34,11 +35,12 @@ export class FiltersComponent implements OnInit, OnChanges {
 
     this.filterForm.valueChanges.pipe(debounceTime(1000)).subscribe(input => {
       if (input) {
-        const jobType = [...this.jobTypeValues];
+        // const jobType = [...this.jobTypeValues];
+        const jobType = {...this.jobType};
         const category = [...this.categoryValues];
-        const filters = { ...input, jobType };
+        const filters = { ...input};
         this.allFilters.emit(filters);
-        // console.log({ input }, { jobType }, { filters });
+        console.log({ input }, 'new jobtype', {jobType} , { filters });
       }
     });
   }
@@ -59,14 +61,15 @@ export class FiltersComponent implements OnInit, OnChanges {
     });
   }
 
-  onJobTypeChange(value: number): void {
-    if (this.jobTypeValues.some(x => x === value)) {
-      const index = this.jobTypeValues.findIndex(x => x === value);
-      this.jobTypeValues.splice(index, 1);
-    } else {
-      this.jobTypeValues.push(value);
-    }
-    console.log('job type values', this.jobTypeValues);
+  onJobTypeChange(value: string): void {
+    // if (this.jobTypeValues.some(x => x === value)) {
+    //   const index = this.jobTypeValues.findIndex(x => x === value);
+    //   this.jobTypeValues.splice(index, 1);
+    // } else {
+    //   this.jobTypeValues.push(value);
+    // }
+    this.jobType = this.jobTypes.find(x => x.value === value);
+    console.log('job type values', this.jobType);
 
   }
 

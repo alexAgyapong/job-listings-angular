@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ListingsService } from 'src/app/shared/services/listings.service';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -14,12 +14,14 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   templateUrl: './job-list.component.html',
   styleUrls: ['./job-list.component.scss']
 })
-export class JobListComponent implements OnInit {
+export class JobListComponent implements OnInit, AfterViewInit {
   resultCount: number;
   jobs$ = new Observable<Job[]>();
   req: JobRequestOptions;
   categories$: Observable<Category[]>;
   searchForm: FormGroup;
+  @ViewChild('jobs') jobsTarget: ElementRef;
+
 
   constructor(private listingsService: ListingsService, private fb: FormBuilder, private route: ActivatedRoute) { }
 
@@ -33,8 +35,8 @@ export class JobListComponent implements OnInit {
     // };
 
     this.route.queryParamMap.subscribe(params => {
-      let what = (params.get('what'));
-      let where = (params.get('where'));
+      const what = (params.get('what'));
+      const where = (params.get('where'));
       this.req = { ...this.req, what, where };
       console.log('in route para', this.req);
       if (this.req) {
@@ -45,6 +47,9 @@ export class JobListComponent implements OnInit {
     this.getCategories();
   }
 
+  ngAfterViewInit() {
+    // console.log('refhere', this.jobsTarget);
+  }
 
   private getJobs(req: JobRequestOptions, page?: number): void {
     this.jobs$ = this.listingsService.getListings(req, page)
@@ -60,51 +65,28 @@ export class JobListComponent implements OnInit {
   getAllFilters(filters: any): void {
     console.log('local req', this.req, 'filters from child', filters);
 
-    if (filters) {
-      let req = { ...this.req, ...filters } as JobRequestOptions;
-      this.getJobTypeParams(filters.jobType, req);
-      console.log({ req }, 'in all filters');
+    // if (filters) {
+    //   const req = { ...this.req, ...filters } as JobRequestOptions;
+    //   this.getJobTypeParams(filters.jobType, req);
+    //   console.log({ req }, 'in all filters');
 
-      this.getJobs(req);
-    }
+    //   this.getJobs(req);
+    // }
   }
 
-  getJobTypeParams(types: string[], req: JobRequestOptions): void {
-    types.forEach(x => {
-      if (x === 'permanent') { req.permanent = '1'; }
-      if (x === 'contract') { req.contract = '1'; }
-      if (x === 'full_time') { req.full_time = '1'; }
-      if (x === 'part_time') { req.part_time = '1'; }
-    });
+  getJobTypeParams(jobType: string, req: JobRequestOptions): void {
+    if (jobType === 'permanent') { req.permanent = '1'; }
+    if (jobType === 'contract') { req.contract = '1'; }
+    if (jobType === 'full_time') { req.full_time = '1'; }
+    if (jobType === 'part_time') { req.part_time = '1'; }
   }
 
 
   getSelectedFilter(filter: string): void {
     console.log({ filter });
-    switch (filter) {
-      case 'full_time':
-        this.req.full_time = '1';
-        console.log('req', this.req);
-
-        this.getJobs(this.req);
-        break;
-      case 'part_time':
-        this.req.part_time = '1';
-        console.log('req with part time', this.req);
-
-        this.getJobs(this.req);
-        break;
-      case 'contract':
-        this.req.contract = '1';
-        console.log('req with part time', this.req);
-
-        this.getJobs(this.req);
-        break;
-
-      default:
-        break;
-    }
-
+    this.getJobTypeParams(filter, this.req);
+    this.getJobs(this.req);
+    this.scroll(this.jobsTarget.nativeElement);
   }
 
   pageChanged(event: PageChangedEvent): void {
@@ -113,8 +95,6 @@ export class JobListComponent implements OnInit {
   }
 
   scroll(el: HTMLElement): void {
-    console.log({ el });
-
     el.scrollIntoView();
   }
 }
