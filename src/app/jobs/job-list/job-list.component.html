@@ -10,7 +10,7 @@
         <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
       </div>
       <ng-container *ngIf="resultCount">
-        <pagination class="ml-3" [totalItems]="resultCount" [itemsPerPage]="20" (pageChanged)="pageChanged($event)"
+        <pagination class="ml-3" [totalItems]="resultCount" [maxSize]="maxPageSize" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"
           (click)="scroll(jobs)">
         </pagination>
       </ng-container>

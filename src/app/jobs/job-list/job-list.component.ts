@@ -20,6 +20,8 @@ export class JobListComponent implements OnInit, AfterViewInit {
   req: JobRequestOptions;
   categories$: Observable<Category[]>;
   searchForm: FormGroup;
+  maxPageSize = 15;
+  itemsPerPage = 20;
   @ViewChild('jobs') jobsTarget: ElementRef;
 
 
