@@ -14,7 +14,7 @@
         (click)="showFilters(filtersTemplate)">Filters</button></div>
     <div class="col-sm-9" #jobs>
       <div *ngFor="let job of jobs$|async">
-        <app-job-card [job]="job" (filter)="getSelectedFilter($event)"></app-job-card>
+        <app-job-card [job]="job" (filter)="getSelectedFilter($event)" (shortListedJob)="updateShortListed($event)"></app-job-card>
       </div>
       <ng-container *ngIf="resultCount">
         <pagination class="ml-3" [totalItems]="resultCount" [maxSize]="maxPageSize" [itemsPerPage]="itemsPerPage"

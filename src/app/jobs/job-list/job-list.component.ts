@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-job-list',
@@ -26,17 +27,13 @@ export class JobListComponent implements OnInit, AfterViewInit {
   @ViewChild('jobs') jobsTarget: ElementRef;
 
   modalRef: BsModalRef;
+  faCoffee = faCoffee;
+  faHeart = faHeart;
+  shortListed: Job[] = [];
   constructor(private listingsService: ListingsService, private fb: FormBuilder,
-    private route: ActivatedRoute, private modalService: BsModalService) { }
+              private route: ActivatedRoute, private modalService: BsModalService) { }
 
   ngOnInit(): void {
-
-    // this.searchForm = this.fb.group({ what: [''], where: [''] });
-    // this.req = {
-    //   what: this.searchForm.get('what').value || 'Fullstack developer',
-    //   where: this.searchForm.get('where').value || 'London',
-    //   pageSize: 20
-    // };
 
     this.route.queryParamMap.subscribe(params => {
       const what = (params.get('what'));
@@ -117,5 +114,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
   scroll(el: HTMLElement): void {
     el.scrollIntoView();
+  }
+
+  updateShortListed(job:Job):void{
+    // let res = [];
+    this.shortListed.push(job);
+    console.log({job}, 'in list',this.shortListed);
+
   }
 }

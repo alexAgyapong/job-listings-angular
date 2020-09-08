@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-outline-none {
+  outline: none;
+  background: transparent;
+  border: 1px solid transparent;
+  &:active,
+  &:focus {
+    outline: none;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+}

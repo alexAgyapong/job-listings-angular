@@ -1,15 +1,34 @@
-<div class="card my-3 m-sm-3 p-3 text-dark">
-  <p class="card-text ">{{job?.company?.display_name|removeHtmlTags}}</p>
-  <a class="card-text pb-3"  [href]="job?.redirect_url" target="_blank" rel="noopener noreferrer">{{job?.title|removeHtmlTags}}</a>
-  <span class="d-flex justify-content-between mr-1">
-    <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
-      {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
+<div class="position-relative">
+  <div class="card my-3 m-sm-3 p-3 text-dark">
+    <p class="card-text ">{{job?.company?.display_name|removeHtmlTags}}</p>
+    <a class="card-text pb-3" [href]="job?.redirect_url" target="_blank"
+      rel="noopener noreferrer">{{job?.title|removeHtmlTags}}</a>
+    <span class="d-flex justify-content-between mr-1">
+      <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
+        {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
+      </span>
+      <span class="card-text">{{job?.location?.display_name}}</span>
     </span>
-    <span class="card-text">{{job?.location?.display_name}}</span>
-  </span>
-  <span class="d-flex mt-3">
-    <span *ngIf="job.contract_type" class="card-text mr-3"><button class="btn btn-outline-secondary" (click)="getSelectedFilter(job?.contract_type)">{{job?.contract_type|titlecase}}</button></span>
-    <span *ngIf="job.contract_time" class="card-text "><button class="btn btn-outline-secondary text-capitalize" (click)="getSelectedFilter(job?.contract_time)">{{job?.contract_time|removeUnderscore}}</button></span>
-  </span>
-  <p class="card-text mt-3">{{job?.description|removeHtmlTags}}</p>
+    <span class="d-flex mt-3">
+      <span *ngIf="job.contract_type" class="card-text mr-3"><button class="btn btn-outline-secondary"
+          (click)="getSelectedFilter(job?.contract_type)">{{job?.contract_type|titlecase}}</button></span>
+      <span *ngIf="job.contract_time" class="card-text "><button class="btn btn-outline-secondary text-capitalize"
+          (click)="getSelectedFilter(job?.contract_time)">{{job?.contract_time|removeUnderscore}}</button></span>
+    </span>
+    <p class="card-text mt-3">{{job?.description|removeHtmlTags}}</p>
+  </div>
+  <div class="fav-icon">
+    <span *ngIf="!isShortListed">
+      <span class="rounded-circle py-3" (click)="addToShortList(job)">
+        <fa-icon [icon]="faHeart" class="text-body" [styles]="{'stroke': 'gray', 'color': 'gray'}">
+        </fa-icon>
+      </span>
+    </span>
+    <span *ngIf="isShortListed">
+      <span class="rounded-circle py-3" (click)="removeFromShortList(job)">
+        <fa-icon [icon]="faHeart">
+        </fa-icon>
+      </span>
+    </span>
+  </div>
 </div>
