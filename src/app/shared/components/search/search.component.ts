@@ -11,11 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   @Output() searchTerms = new EventEmitter<JobRequestOptions>();
+  @Output() isSearching = new EventEmitter<boolean>();
   searchForm: FormGroup;
   req: JobRequestOptions;
 
   constructor(private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     console.log('current route', this.router.url);
@@ -36,6 +37,7 @@ export class SearchComponent implements OnInit {
     const params: JobRequestOptions = {};
     if (req.what) { params.what = req.what; }
     if (req.where) { params.where = req.where; }
-    this.router.navigate(['/jobs'], { queryParams: params});
+    this.isSearching.emit(true);
+    this.router.navigate(['/jobs'], { queryParams: params });
   }
 }

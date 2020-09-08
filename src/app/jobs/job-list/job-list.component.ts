@@ -76,6 +76,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
     //   this.getJobs(req);
     // }
+    this.modalRef.hide();
   }
 
   getJobTypeParams(jobType: string, req: JobRequestOptions): void {
@@ -91,6 +92,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
     this.getJobTypeParams(filter, this.req);
     this.getJobs(this.req);
     this.scroll(this.jobsTarget.nativeElement);
+
   }
 
   showModal(template: TemplateRef<any>): void {
@@ -98,6 +100,16 @@ export class JobListComponent implements OnInit, AfterViewInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  showFilters(template: TemplateRef<any>): void {
+    console.log('search clicked');
+    this.modalRef = this.modalService.show(template);
+  }
+
+  hideModalOnSearch(isSearching: boolean): void {
+    if (isSearching) {
+      this.modalRef.hide();
+    }
+  }
   pageChanged(event: PageChangedEvent): void {
     console.log({ event });
     this.getJobs(this.req, event.page);
