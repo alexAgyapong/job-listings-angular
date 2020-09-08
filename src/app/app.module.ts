@@ -17,6 +17,7 @@ import { SearchComponent } from './shared/components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true

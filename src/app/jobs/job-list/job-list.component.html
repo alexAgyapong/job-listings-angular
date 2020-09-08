@@ -1,5 +1,9 @@
 <div class="container">
-  <app-search></app-search>
+  <div class="d-none d-sm-block"><app-search></app-search></div>
+  <div class="d-block d-sm-none mt-3">
+    <input class="form-control" type="search"
+    name="searchTerm" id="searchTerm" placeholder="Job title or keywords ....." autocomplete="off" (click)="showModal(searchTemplate)">
+  </div>
   <div class="row">
     <div class="col-sm-3 d-none d-sm-block">
       <app-filters [categories]="categories$|async" (allFilters)="getAllFilters($event)"></app-filters>
@@ -17,3 +21,15 @@
     </div>
   </div>
 </div>
+
+<ng-template #searchTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Search</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-search></app-search>
+  </div>
+</ng-template>

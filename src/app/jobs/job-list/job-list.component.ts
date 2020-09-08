@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, TemplateRef } from '@angular/core';
 import { ListingsService } from 'src/app/shared/services/listings.service';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { FilterType } from './../../shared/models/job';
 import { ActivatedRoute } from '@angular/router';
 
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-job-list',
@@ -24,8 +25,9 @@ export class JobListComponent implements OnInit, AfterViewInit {
   itemsPerPage = 20;
   @ViewChild('jobs') jobsTarget: ElementRef;
 
-
-  constructor(private listingsService: ListingsService, private fb: FormBuilder, private route: ActivatedRoute) { }
+  modalRef: BsModalRef;
+  constructor(private listingsService: ListingsService, private fb: FormBuilder,
+    private route: ActivatedRoute, private modalService: BsModalService) { }
 
   ngOnInit(): void {
 
@@ -89,6 +91,11 @@ export class JobListComponent implements OnInit, AfterViewInit {
     this.getJobTypeParams(filter, this.req);
     this.getJobs(this.req);
     this.scroll(this.jobsTarget.nativeElement);
+  }
+
+  showModal(template: TemplateRef<any>): void {
+    console.log('search clicked');
+    this.modalRef = this.modalService.show(template);
   }
 
   pageChanged(event: PageChangedEvent): void {
