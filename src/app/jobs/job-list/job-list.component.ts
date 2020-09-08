@@ -55,10 +55,27 @@ export class JobListComponent implements OnInit, AfterViewInit {
   private getJobs(req: JobRequestOptions, page?: number): void {
     this.jobs$ = this.listingsService.getListings(req, page)
       .pipe(tap(data => this.resultCount = data.count),
-        map(res => res.results)
+        map(res => res.results),
+        tap(data => this.setShortListedFlag(data))
       );
   }
 
+  setShortListedFlag(jobs: Job[]): void {
+    const data = localStorage.getItem('shortListed');
+    const jobsFromStorage = JSON.parse(data) as Job[];
+    if (jobsFromStorage && jobsFromStorage.length) {
+      jobsFromStorage.forEach(j => {
+        jobs.forEach(x => {
+          if (j.id === x.id) {
+            x.isShortListed = true;
+            console.log('set....', { x }, { j });
+          }
+        });
+      });
+    }
+    console.log({ jobs }, 'flags set');
+
+  }
   private getCategories(): void {
     this.categories$ = this.listingsService.getCategories();
   }

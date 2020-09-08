@@ -26,7 +26,7 @@ export class JobCardComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     // Add '${implements OnChanges}' to the class.
-
+    this.job.isShortListed ? this.isShortListed = true : this.isShortListed = false;
   }
 
   public getSelectedFilter(event: string): void {
@@ -43,7 +43,7 @@ export class JobCardComponent implements OnInit, OnChanges {
 
   removeFromShortList(job: Job): void {
     this.isShortListed = false;
-    
+
     this.removedFromShortList.emit(job);
 
     console.log('short list', { job }, 'shortlisted removed', this.shortListed);

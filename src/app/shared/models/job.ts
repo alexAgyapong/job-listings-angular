@@ -33,6 +33,7 @@ export interface Job {
   salary_max: number;
   salary_is_predicted: string;
   contract_type: string;
+  isShortListed?: boolean;
 }
 
 export interface JobResponse {
