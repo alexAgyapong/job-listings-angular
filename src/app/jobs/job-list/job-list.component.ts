@@ -31,7 +31,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   faHeart = faHeart;
   shortListed: Job[] = [];
   constructor(private listingsService: ListingsService, private fb: FormBuilder,
-              private route: ActivatedRoute, private modalService: BsModalService) { }
+    private route: ActivatedRoute, private modalService: BsModalService) { }
 
   ngOnInit(): void {
 
@@ -116,10 +116,28 @@ export class JobListComponent implements OnInit, AfterViewInit {
     el.scrollIntoView();
   }
 
-  updateShortListed(job:Job):void{
-    // let res = [];
-    this.shortListed.push(job);
-    console.log({job}, 'in list',this.shortListed);
+  updateShortListed(job: Job): void {
+    this.getShortListedFromLocalStorage();
+    if (!this.shortListed.some(x => x.id === job.id)) {
+      this.shortListed.push(job);
+      localStorage.setItem('shortListed', JSON.stringify(this.shortListed));
+    }
+    console.log({ job }, 'in list', this.shortListed);
 
+  }
+
+  getShortListedFromLocalStorage(): void {
+    const data = localStorage.getItem('shortListed');
+    const jobs = JSON.parse(data) as Job[];
+    if (jobs && jobs.length) {
+      this.shortListed = [...jobs]; console.log('from storage', this.shortListed);
+    }
+  }
+
+  updateRemovedShortListed(job: Job): void {
+    const index = this.shortListed.findIndex(x => x.id === job.id);
+    this.shortListed.splice(index, 1);
+    localStorage.setItem('shortListed', JSON.stringify(this.shortListed));
+    console.log({ job }, 'removed in list', this.shortListed);
   }
 }

@@ -43,9 +43,7 @@ export class JobCardComponent implements OnInit, OnChanges {
 
   removeFromShortList(job: Job): void {
     this.isShortListed = false;
-    // const index = this.shortListed.findIndex(x => x.id === job.id);
-    // this.shortListed.splice(index, 1);
-    // this.shortListedJobs.emit(this.shortListed)
+    
     this.removedFromShortList.emit(job);
 
     console.log('short list', { job }, 'shortlisted removed', this.shortListed);
