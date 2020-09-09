@@ -13,12 +13,14 @@
       <section class="pt-3">
         <h6>From</h6>
         <select class="custom-select" formControlName="minSalary">
+          <option selected value="0">£ Any</option>
           <option *ngFor="let item of salaries" [value]="item?.value">{{item?.name}}</option>
         </select>
       </section>
       <section class="pt-3">
         <h6>To</h6>
         <select class="custom-select" formControlName="maxSalary">
+          <option selected value="0">£ Any</option>
           <option *ngFor="let item of salaries" [value]="item?.value">{{item?.name}}</option>
         </select>
       </section>
@@ -36,6 +38,7 @@
     <section class="pt-3  mb-3">
       <h6>Date posted</h6>
       <select class="custom-select" formControlName="maxDaysOld">
+        <option selected value="0">Anytime</option>
         <option *ngFor="let item of period" [value]="item?.value">{{item?.name}}</option>
       </select>
     </section>

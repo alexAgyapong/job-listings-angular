@@ -52,10 +52,10 @@ export class FiltersComponent implements OnInit, OnChanges {
   setupForm(): void {
     this.filterForm = this.fb.group({
       distance: [10],
-      minSalary: [''],
-      maxSalary: [''],
+      minSalary: ['0'],
+      maxSalary: ['0'],
       jobType: [''],
-      maxDaysOld: [''],
+      maxDaysOld: ['0'],
       category: [''],
       location: ['']
     });
