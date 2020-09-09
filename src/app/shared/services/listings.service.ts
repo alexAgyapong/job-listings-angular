@@ -48,8 +48,8 @@ export class ListingsService {
         app_key: environment.appKey,
         what: req?.what,
         where: req?.where,
-        salary_min: req?.minSalary?.toString() || minSalary,
-        salary_max: req?.maxSalary?.toString() || maxSalary,
+        salary_min: req?.minSalary > 0 ? req?.minSalary?.toString() : minSalary,
+        salary_max: req?.maxSalary > 0 ? req?.maxSalary?.toString() : maxSalary,
 
         category: req?.category || '',
         max_days_old: req?.maxDaysOld?.toString() || '',

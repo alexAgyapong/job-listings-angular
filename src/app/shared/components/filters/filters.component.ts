@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class FiltersComponent implements OnInit, OnChanges {
   @Input() categories: Category[];
+  @Input() isFiltersCleared = false;
   @Output() allFilters = new EventEmitter<any>();
   filterForm: FormGroup;
   distancesInKm: { name: string; value: number; }[];
@@ -36,17 +37,21 @@ export class FiltersComponent implements OnInit, OnChanges {
     this.filterForm.valueChanges.pipe(debounceTime(1000)).subscribe(input => {
       if (input) {
         // const jobType = [...this.jobTypeValues];
-        const jobType = {...this.jobType};
+        const jobType = { ...this.jobType };
         const category = [...this.categoryValues];
-        const filters = { ...input};
+        const filters = { ...input };
         this.allFilters.emit(filters);
-        console.log({ input }, 'new jobtype', {jobType} , { filters });
+        console.log({ input }, 'new jobtype', { jobType }, { filters });
       }
     });
   }
 
   ngOnChanges(): void {
-
+    // if (this.isFiltersCleared) {
+    //   if (this.filterForm) {
+    //     this.filterForm.reset();
+    //   }
+    // }
   }
 
   setupForm(): void {

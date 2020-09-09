@@ -30,6 +30,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   faCoffee = faCoffee;
   faHeart = faHeart;
   shortListed: Job[] = [];
+  isFiltersCleared: boolean;
   constructor(private listingsService: ListingsService, private fb: FormBuilder,
     private route: ActivatedRoute, private modalService: BsModalService) { }
 
@@ -83,14 +84,16 @@ export class JobListComponent implements OnInit, AfterViewInit {
   getAllFilters(filters: any): void {
     console.log('local req', this.req, 'filters from child', filters);
 
-    // if (filters) {
-    //   const req = { ...this.req, ...filters } as JobRequestOptions;
-    //   this.getJobTypeParams(filters.jobType, req);
-    //   console.log({ req }, 'in all filters');
+    if (filters) {
+      const req = { ...this.req, ...filters } as JobRequestOptions;
+      this.getJobTypeParams(filters.jobType, req);
+      console.log({ req }, 'in all filters');
 
-    //   this.getJobs(req);
-    // }
-    this.modalRef.hide();
+      this.getJobs(req);
+    }
+    if (this.modalRef) {
+      this.modalRef.hide();
+    }
   }
 
   getJobTypeParams(jobType: string, req: JobRequestOptions): void {
@@ -117,6 +120,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
   showFilters(template: TemplateRef<any>): void {
     console.log('search clicked');
     this.modalRef = this.modalService.show(template);
+  }
+
+  clearFilters(): void {
+    this.isFiltersCleared = true;
+    console.log('clear filters');
+
   }
 
   hideModalOnSearch(isSearching: boolean): void {
