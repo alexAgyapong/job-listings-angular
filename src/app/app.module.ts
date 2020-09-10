@@ -15,10 +15,18 @@ import { RemoveHtmlTagsPipe } from './shared/pipes/remove-html-tags.pipe';
 import { FiltersComponent } from './shared/components/filters/filters.component';
 import { SearchComponent } from './shared/components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
+import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
 
 @NgModule({
   declarations: [
@@ -30,21 +38,49 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     JobDetailsComponent,
     RemoveHtmlTagsPipe,
     FiltersComponent,
-    SearchComponent
+    SearchComponent,
+    ShortlistComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    SocialLoginModule
   ],
-  providers: [{
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.googleAppId
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId'),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(
+              'clientId'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+    {
     provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true
-  }],
+  },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

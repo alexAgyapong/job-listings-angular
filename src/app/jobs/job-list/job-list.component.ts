@@ -42,8 +42,8 @@ export class JobListComponent implements OnInit, AfterViewInit {
       this.req = { ...this.req, what, where };
       console.log('in route para', this.req);
       if (this.req) {
-        this.getJobs(this.req);
       }
+      this.getJobs(this.req);
     });
 
     this.getCategories();

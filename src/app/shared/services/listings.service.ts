@@ -46,8 +46,8 @@ export class ListingsService {
       fromObject: {
         app_id: environment.appId,
         app_key: environment.appKey,
-        what: req?.what,
-        where: req?.where,
+        what: req?.what || '',
+        where: req?.where || '',
         salary_min: req?.minSalary > 0 ? req?.minSalary?.toString() : minSalary,
         salary_max: req?.maxSalary > 0 ? req?.maxSalary?.toString() : maxSalary,
 

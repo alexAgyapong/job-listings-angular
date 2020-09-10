@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="row row-cols-sm-2">
+    <div *ngFor="let job of jobs">
+      <app-job-card [job]="job" (removedFromShortList)="updateRemovedShortListed($event)"></app-job-card>
+    </div>
+  </div>
+</div>
