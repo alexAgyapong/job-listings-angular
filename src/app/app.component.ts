@@ -13,21 +13,40 @@ export class AppComponent implements OnInit {
   loggedIn: boolean;
 
   modalRef: BsModalRef;
+  userDetailsModalRef: BsModalRef;
   constructor(private authService: SocialAuthService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
+    this.getUserFromStorage();
+    if (this.user === null) {
+      this.getUserDetails();
+    }
+  }
+
+  getUserDetails(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       console.log({ user });
-
+      localStorage.setItem('user', JSON.stringify(user));
       this.loggedIn = (user != null);
+      if (this.loggedIn && this.modalRef) { this.modalRef.hide(); }
     });
+  }
+
+  getUserFromStorage(): void {
+    const data = localStorage.getItem('user');
+    const user = JSON.parse(data) as SocialUser;
+    if (user) { this.loggedIn = true; this.user = { ...user }; }
   }
 
   showLogin(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
-  
+
+  showUserDetails(template: TemplateRef<any>): void {
+    this.userDetailsModalRef = this.modalService.show(template);
+  }
+
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }

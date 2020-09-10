@@ -20,6 +20,8 @@ export class ShortlistComponent implements OnInit {
     const jobs = JSON.parse(data) as Job[];
     if (jobs && jobs.length) {
       this.jobs = [...jobs];
+      console.log({jobs}, 'in shortlisted componennt');
+
     }
   }
 
