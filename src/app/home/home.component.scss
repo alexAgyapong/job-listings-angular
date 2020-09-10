@@ -1,9 +1,10 @@
-.cat-container{
+.cat-container {
   height: 250px;
   width: 90vw;
 }
 .eng-bg {
-  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60") rgba(243, 172, 215, 0.3);
+  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
+    rgba(243, 172, 215, 0.3);
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
@@ -14,8 +15,17 @@
   justify-content: center;
   align-items: center;
 }
-.header-btn{
+.header-btn {
   font-size: 1.3rem;
+}
+
+.banner {
+  background: url("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
+    hsl(330, 23%, 86%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: multiply;
 }
 // .overlay {
 //   background: red;
