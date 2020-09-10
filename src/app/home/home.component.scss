@@ -1,0 +1,36 @@
+.cat-container{
+  height: 250px;
+  width: 90vw;
+}
+.eng-bg {
+  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60") rgba(243, 172, 215, 0.3);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  width: 25%;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-btn{
+  font-size: 1.3rem;
+}
+// .overlay {
+//   background: red;
+//   height: 100%;
+//   width: 100%;
+//   opacity: 0.7;
+//   position: absolute;
+// }
+
+// .content {
+//   z-index: 1;
+//   display: flex;
+//   flex-direction: column;
+//   text-align: center;
+// }
+// .health-bg {
+//   background: url("");
+// }

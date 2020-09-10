@@ -37,9 +37,10 @@ export class JobListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.route.queryParamMap.subscribe(params => {
-      const what = (params.get('what'));
-      const where = (params.get('where'));
-      this.req = { ...this.req, what, where };
+      const what = params.get('what');
+      const where = params.get('where');
+      const category = params.get('category');
+      this.req = { ...this.req, what, where , category};
       console.log('in route para', this.req);
       if (this.req) {
       }

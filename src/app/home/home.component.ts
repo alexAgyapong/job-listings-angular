@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ListingsService } from './../shared/services/listings.service';
 import { GeocodeService } from './../shared/services/geocode.service';
+import { Observable } from 'rxjs';
+import { Category } from '../shared/models/job';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +10,18 @@ import { GeocodeService } from './../shared/services/geocode.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  categories$ = new Observable<Category[]>();
 
   constructor(private listingsService: ListingsService, private geocodeService: GeocodeService) { }
 
   ngOnInit(): void {
     // this.listingsService.getListings().subscribe(res => console.log({ res }));
     this.getCurrentLocation();
+    this.getCategories();
+  }
 
+  private getCategories(): void {
+    this.categories$ = this.listingsService.getCategories();
   }
 
   getCurrentLocation(): any {
