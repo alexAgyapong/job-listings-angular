@@ -49,7 +49,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
     this.getCategories();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     // console.log('refhere', this.jobsTarget);
   }
 
@@ -145,6 +145,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   updateShortListed(job: Job): void {
     this.getShortListedFromLocalStorage();
     if (!this.shortListed.some(x => x.id === job.id)) {
+      job = { ...job, isShortListed: true };
       this.shortListed.push(job);
       localStorage.setItem('shortListed', JSON.stringify(this.shortListed));
     }
