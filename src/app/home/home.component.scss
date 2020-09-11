@@ -26,6 +26,21 @@
   background-repeat: no-repeat;
   background-position: center;
   background-blend-mode: multiply;
+  height: 70vh;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-content {
+  width: 90vw;
+  // padding: 1rem;
+  // border: 2px solid red;
+  // background-color: hsl(343, 6%, 23%);
+  // opacity: .6;
+  // margin: 0 2rem;
 }
 // .overlay {
 //   background: red;
@@ -44,3 +59,9 @@
 // .health-bg {
 //   background: url("");
 // }
+
+@media only screen and (min-width:768px){
+  .banner-content{
+    padding: 1rem;
+  }
+}
