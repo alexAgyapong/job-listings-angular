@@ -1,15 +1,18 @@
 <div class="mx-0 mx-sm-3">
-  <form [formGroup]="searchForm" (ngSubmit)="searchJobs()">
+  <form [formGroup]="searchForm" (ngSubmit)="searchJobs()" autocomplete="off">
     <div class="form-row">
       <div class="form-group col-sm-5">
         <label for="what">What</label>
-        <input class="form-control" [ngClass]="{'form-control-lg': isLargeInput}" type="search" id="what" formControlName="what">
+        <input class="form-control" [ngClass]="{'form-control-lg': isLargeInput}" type="search" id="what"
+          formControlName="what" placeholder="Job title, skill or company">
       </div>
       <div class="form-group col-sm-5">
         <label for="where">Where</label>
-        <input class="form-control" [ngClass]="{'form-control-lg': isLargeInput}"  type="search" id="where" formControlName="where">
+        <input class="form-control" [ngClass]="{'form-control-lg': isLargeInput}" type="search" id="where"
+          formControlName="where"  placeholder="Town, city or postcode">
       </div>
-      <div class="col-sm-2 mt-4 pt-2"><button class="btn btn-block  bg-voilet-red text-white" [ngClass]="{'btn-lg': isLargeInput}"  type="submit">Search</button>
+      <div class="col-sm-2 mt-4 pt-2"><button class="btn btn-block  bg-voilet-red text-white"
+          [ngClass]="{'btn-lg': isLargeInput}" type="submit">Search</button>
       </div>
     </div>
   </form>
