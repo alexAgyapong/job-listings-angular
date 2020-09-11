@@ -14,38 +14,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  // &:hover,
+  // &:active {
+  //   text-decoration: none;
+  // }
 }
 .eng-bg {
   background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
     rgba(243, 172, 215, 0.3);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
 }
 .it-bg {
   background: url("https://images.unsplash.com/photo-1480506132288-68f7705954bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
     rgba(243, 172, 215, 0.3);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
 }
 .health-bg {
   background: url("https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
     rgba(243, 172, 215, 0.3);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
 }
 .graduate-bg {
   background: url("https://images.unsplash.com/photo-1599687267899-09999a5d92fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
     rgba(243, 172, 215, 0.3);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
 }
 
 .header-btn {
@@ -86,23 +91,6 @@
   // opacity: .6;
   // margin: 0 2rem;
 }
-// .overlay {
-//   background: red;
-//   height: 100%;
-//   width: 100%;
-//   opacity: 0.7;
-//   position: absolute;
-// }
-
-// .content {
-//   z-index: 1;
-//   display: flex;
-//   flex-direction: column;
-//   text-align: center;
-// }
-// .health-bg {
-//   background: url("");
-// }
 
 @media only screen and (min-width: 768px) {
   .banner-content {
