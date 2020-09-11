@@ -31,6 +31,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   faHeart = faHeart;
   shortListed: Job[] = [];
   isFiltersCleared: boolean;
+  selectedCategoryTag: string;
   constructor(private listingsService: ListingsService, private fb: FormBuilder,
     private route: ActivatedRoute, private modalService: BsModalService) { }
 
@@ -40,9 +41,10 @@ export class JobListComponent implements OnInit, AfterViewInit {
       const what = params.get('what');
       const where = params.get('where');
       const category = params.get('category');
-      this.req = { ...this.req, what, where , category};
+      this.req = { ...this.req, what, where, category };
       console.log('in route para', this.req);
-      if (this.req) {
+      if (category) {
+        this.selectedCategoryTag = category;
       }
       this.getJobs(this.req);
     });
