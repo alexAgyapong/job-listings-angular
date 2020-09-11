@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class FiltersComponent implements OnInit, OnChanges {
   @Input() categories: Category[];
+  @Input() selectedCategoryTag: string;
   @Input() isFiltersCleared = false;
   @Output() allFilters = new EventEmitter<any>();
   filterForm: FormGroup;
@@ -52,8 +53,12 @@ export class FiltersComponent implements OnInit, OnChanges {
     //     this.filterForm.reset();
     //   }
     // }
+    this.populateSelectedCategory();
   }
 
+  populateSelectedCategory(): void {
+    if (this.filterForm && this.selectedCategoryTag) { this.filterForm.get('category').setValue(this.selectedCategoryTag) }
+  }
   setupForm(): void {
     this.filterForm = this.fb.group({
       distance: [10],
