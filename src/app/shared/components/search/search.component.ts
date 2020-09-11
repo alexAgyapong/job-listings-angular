@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ListingsService } from '../../services/listings.service';
 import { JobRequestOptions } from 'src/app/shared/models/job';
@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  @Input() isLargeInput = false;
   @Output() searchTerms = new EventEmitter<JobRequestOptions>();
   @Output() isSearching = new EventEmitter<boolean>();
   searchForm: FormGroup;
