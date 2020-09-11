@@ -1,32 +1,33 @@
-<!-- <div class="jumbotron jumbotron-fluid p-3 p-sm-5 text-white text-center font-weight-bold banner">
-  <app-search></app-search>
-</div> -->
 <div class="banner text-white">
   <h1>Get everything you need from a job</h1>
   <div class="banner-content mx-sm-auto">
     <app-search [isLargeInput]="true">
-    </app-search></div>
+    </app-search>
+  </div>
 </div>
 <section class="pt-3 m-3">
   <h3 class="text-center">Choose your sector</h3>
   <h5 class="text-center mb-3 pb-3">See the latest roles below</h5>
   <div class="d-none d-sm-block">
     <div class="d-flex justify-content-between cat-container">
-      <div class="eng-bg rounded">
-        <h3 class="text-white">Engineering</h3>
-      </div>
-      <a class="eng-bg rounded mx-4">
-        <h3 class="text-white"> Technology</h3>
-      </a>
-      <div class="eng-bg rounded">
-        <h3> Health</h3>
-      </div>
-      <div class="eng-bg rounded ml-4">
-        <h3>Graduate</h3>
+      <div *ngFor="let item of sectors">
+        <a class="sector rounded" [routerLink]="['/jobs']" [queryParams]="{category:item?.tag}"
+          [ngClass]="{'eng-bg': item.tag=='engineering-jobs','graduate-bg': item.tag=='graduate-jobs','it-bg': item.tag=='it-jobs','health-bg': item.tag=='healthcare-nursing-jobs' }">
+          <h3 class="text-white text-center">{{item.label}}</h3>
+        </a>
       </div>
     </div>
+    <!-- <a class="sector rounded mx-4">
+          <h3 class="text-white"> Technology</h3>
+        </a>
+        <div class="sector rounded">
+          <h3> Health</h3>
+        </div>
+        <div class="sector rounded ml-4">
+          <h3>Graduate</h3>
+        </div> -->
   </div>
-  <div class="d-none d-sm-block">
+  <div class="d-none d-sm-block mx-sm-5">
     <div class="row row-cols-1 row-cols-sm-4 mt-3" id="job-sectors">
       <div *ngFor="let category of categories$|async">
         <a [routerLink]="['/jobs']" [queryParams]="{category:category?.tag}" routerLinkActive="router-link-active"

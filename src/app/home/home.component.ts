@@ -3,6 +3,7 @@ import { ListingsService } from './../shared/services/listings.service';
 import { GeocodeService } from './../shared/services/geocode.service';
 import { Observable } from 'rxjs';
 import { Category } from '../shared/models/job';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { Category } from '../shared/models/job';
 })
 export class HomeComponent implements OnInit {
   categories$ = new Observable<Category[]>();
+  jobTags = ['engineering-jobs', 'graduate-jobs', 'it-jobs', 'healthcare-nursing-jobs'];
+  sectors: Category[];
 
   constructor(private listingsService: ListingsService, private geocodeService: GeocodeService) { }
 
@@ -21,7 +24,13 @@ export class HomeComponent implements OnInit {
   }
 
   private getCategories(): void {
-    this.categories$ = this.listingsService.getCategories();
+    this.categories$ = this.listingsService.getCategories().pipe(tap((data) => this.getSectors(data)));
+  }
+
+  getSectors(data: Category[]): void {
+   this.sectors = data.filter(x => this.jobTags.includes(x.tag));
+    console.log({ data }, 'for selectors');
+
   }
 
   getCurrentLocation(): any {
