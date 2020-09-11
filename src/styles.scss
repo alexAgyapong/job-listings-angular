@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-.nav-link{
+.logo {
+  width: 8rem;
+  height: 100%;
+  // border: 1px solid red;
+}
+.nav-link {
   color: white !important;
 }
 
@@ -16,13 +21,19 @@
   }
 }
 
-.bg-nav{
+.bg-nav {
   background: red;
 }
 
-@media only screen and (min-width:768px){
-  nav{
-    font-size: 1.2rem;
+@media only screen and (min-width: 768px) {
+
+  .logo {
+    width: 12rem;
+    height: 100%;
+    // border: 1px solid red;
   }
 
+  nav {
+    font-size: 1.2rem;
+  }
 }
