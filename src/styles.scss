@@ -27,7 +27,8 @@
 
 .modal-width{
   width: 100%;
-  max-width:357px;
+  max-width:350px;
+ text-align: left;
 }
 
 @media only screen and (min-width: 768px) {
@@ -40,5 +41,11 @@
 
   nav {
     font-size: 1.2rem;
+  }
+
+  .modal-width{
+    width: 100%;
+    max-width:500px;
+   text-align: left;
   }
 }

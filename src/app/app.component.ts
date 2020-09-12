@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   showLogin(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-width' }));
   }
 
   showUserDetails(template: TemplateRef<any>): void {
