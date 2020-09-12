@@ -20,6 +20,13 @@
   //   text-decoration: none;
   // }
 }
+.category-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center;
+}
+
 .eng-bg {
   background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=60")
     rgba(243, 172, 215, 0.3);
@@ -78,7 +85,7 @@
   h1 {
     // align-self: flex-start;
     // margin-left: 1.2rem;
-    padding:1rem 0;
+    padding: 1rem 0;
     font-size: 1.8rem;
   }
 }
@@ -101,6 +108,5 @@
     // margin-left: 8rem;
     padding-bottom: 3rem;
     font-size: 2rem;
-
   }
 }

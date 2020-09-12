@@ -117,12 +117,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
   showModal(template: TemplateRef<any>): void {
     console.log('search clicked');
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'bg-success modal-width' }));
   }
 
   showFilters(template: TemplateRef<any>): void {
     console.log('search clicked');
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'bg-danger modal-width' }));
   }
 
   clearFilters(): void {
