@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   getSectors(data: Category[]): void {
-   this.sectors = data.filter(x => this.jobTags.includes(x.tag));
+    this.sectors = data.filter(x => this.jobTags.includes(x.tag));
     console.log({ data }, 'for selectors');
 
   }

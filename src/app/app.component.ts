@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserFromStorage();
-    if (this.user === null) {
-      this.getUserDetails();
-    }
+    // if (this.user === null) {
+    //   this.getUserDetails();
+    // }
   }
 
   getUserDetails(): void {
