@@ -4,6 +4,8 @@ import { GeocodeService } from './../shared/services/geocode.service';
 import { Observable } from 'rxjs';
 import { Category } from '../shared/models/job';
 import { tap } from 'rxjs/operators';
+import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,7 @@ export class HomeComponent implements OnInit {
   categories$ = new Observable<Category[]>();
   jobTags = ['engineering-jobs', 'graduate-jobs', 'it-jobs', 'healthcare-nursing-jobs'];
   sectors: Category[];
+  year = new Date().getFullYear();
 
   constructor(private listingsService: ListingsService, private geocodeService: GeocodeService) { }
 

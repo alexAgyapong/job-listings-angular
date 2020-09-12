@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -42,7 +42,7 @@ import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
     ShortlistComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -78,9 +78,10 @@ import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
       } as SocialAuthServiceConfig,
     },
     {
-    provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true
-  },
-],
+      provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true
+    },
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
