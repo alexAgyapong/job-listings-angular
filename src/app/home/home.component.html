@@ -17,15 +17,6 @@
         </a>
       </div>
     </div>
-    <!-- <a class="sector rounded mx-4">
-          <h3 class="text-white"> Technology</h3>
-        </a>
-        <div class="sector rounded">
-          <h3> Health</h3>
-        </div>
-        <div class="sector rounded ml-4">
-          <h3>Graduate</h3>
-        </div> -->
   </div>
   <div class="d-none d-sm-block mx-sm-5">
     <div class="row row-cols-1 row-cols-sm-4 mt-3" id="job-sectors">
@@ -53,38 +44,40 @@
 <!-- Footer -->
 <footer class="mt-5 pb-5">
   <div class="bg-light">
-    <article class="more-links d-flex justify-content-around  pt-3">
-      <section>
-        <h6>JOBS</h6>
-        <ul class="list-unstyled ">
-          <li><a href="">Contact us</a></li>
-          <li><a href="">Jobseeker Login</a></li>
-          <li><a href="">Job search</a></li>
-          <li><a href="">Browse jobs</a></li>
-          <li><a href="">Popular searches</a></li>
-          <li><a href="">Average salary checker</a></li>
-          <li><a href="">Recruiter directory</a></li>
-        </ul>
-      </section>
-      <section>
-        <h6>RECRUITER</h6>
-        <ul class="list-unstyled">
-          <li><a href="">Recruiter site</a></li>
-          <li><a href="">Post a job</a></li>
-          <li><a href="">CV Search</a></li>
-          <li><a href="">Recruitment agencies</a></li>
-        </ul>
-      </section>
-      <section>
-        <h6>Adwuma.com</h6>
-        <ul class="list-unstyled">
-          <li><a href="">About us</a></li>
-          <li><a href="">Privacy policy</a></li>
-          <li><a href="">Terms and Conditions</a></li>
-          <li><a href="">Press centre</a></li>
-        </ul>
-      </section>
-    </article>
+    <ng-container *ngIf="isTablet else mobileLinks">
+      <article class="more-links d-flex justify-content-around  pt-3">
+        <section>
+          <h6>JOBS</h6>
+          <ul class="list-unstyled ">
+            <li><a href="">Contact us</a></li>
+            <li><a href="">Jobseeker Login</a></li>
+            <li><a href="">Job search</a></li>
+            <li><a href="">Browse jobs</a></li>
+            <li><a href="">Popular searches</a></li>
+            <li><a href="">Average salary checker</a></li>
+            <li><a href="">Recruiter directory</a></li>
+          </ul>
+        </section>
+        <section>
+          <h6>RECRUITER</h6>
+          <ul class="list-unstyled">
+            <li><a href="">Recruiter site</a></li>
+            <li><a href="">Post a job</a></li>
+            <li><a href="">CV Search</a></li>
+            <li><a href="">Recruitment agencies</a></li>
+          </ul>
+        </section>
+        <section>
+          <h6>Adwuma.com</h6>
+          <ul class="list-unstyled">
+            <li><a href="">About us</a></li>
+            <li><a href="">Privacy policy</a></li>
+            <li><a href="">Terms and Conditions</a></li>
+            <li><a href="">Press centre</a></li>
+          </ul>
+        </section>
+      </article>
+    </ng-container>
     <div class="social-links d-flex justify-content-center py-3">
       <ul class="row list-unstyled ">
         <li><a href="">
@@ -102,7 +95,75 @@
       </ul>
     </div>
   </div>
-  <article *ngIf="isTablet" class="copyright text-center mt-5">
+  <ng-template #mobileLinks>
+    <div class="accordion" id="footerAccordion" class="mb-3">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse"
+              data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Jobs
+            </button>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#footerAccordion">
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li><a href="">Contact us</a></li>
+              <li><a href="">Jobseeker Login</a></li>
+              <li><a href="">Job search</a></li>
+              <li><a href="">Browse jobs</a></li>
+              <li><a href="">Popular searches</a></li>
+              <li><a href="">Average salary checker</a></li>
+              <li><a href="">Recruiter directory</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse"
+              data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Recruiter
+            </button>
+          </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#footerAccordion">
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li><a href="">Recruiter site</a></li>
+              <li><a href="">Post a job</a></li>
+              <li><a href="">CV Search</a></li>
+              <li><a href="">Recruitment agencies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed text-dark" type="button" data-toggle="collapse"
+              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Adwuma.com
+            </button>
+          </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#footerAccordion">
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li><a class="text-dark" href="">About us</a></li>
+              <li><a href="">Privacy policy</a></li>
+              <li><a href="">Terms and Conditions</a></li>
+              <li><a href="">Press centre</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <article class="copyright text-center mt-5">
     <span>&copy; adwuma.com {{year}}</span>
   </article>
 </footer>

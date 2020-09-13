@@ -24,7 +24,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   categories$: Observable<Category[]>;
   searchForm: FormGroup;
   maxPageSize: number;
-  itemsPerPage: number = 20;
+  itemsPerPage = 20;
   @ViewChild('jobs') jobsTarget: ElementRef;
 
   modalRef: BsModalRef;
@@ -34,8 +34,11 @@ export class JobListComponent implements OnInit, AfterViewInit {
   isFiltersCleared: boolean;
   selectedCategoryTag: string;
 
-  constructor(private listingsService: ListingsService, private fb: FormBuilder,
-    private route: ActivatedRoute, private modalService: BsModalService, private sharedService: SharedService) { }
+  constructor(private listingsService: ListingsService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private modalService: BsModalService,
+              private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.sharedService.isTabletBreakPoint() ? this.maxPageSize = 15 : this.maxPageSize = 5;

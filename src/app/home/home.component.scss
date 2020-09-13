@@ -91,7 +91,7 @@
   // margin: 0 2rem;
 }
 
-.more-links {
+.more-links, .card-body {
   ul li a {
     color: inherit;
     text-decoration: none;
@@ -102,24 +102,33 @@
   }
 }
 
+.btn-link{
+  text-decoration: none !important;
+}
+
 .social-links {
   ul li a {
     color: inherit;
     text-decoration: none;
   }
+
   #facebook:hover {
-    color: hsl(226, 72%, 20%);
+    color: hsl(221°, 44, 41);
   }
+
   #twitter:hover {
     color: hsl(206, 82%, 63%);
   }
+
   #linkedin:hover {
     color: hsl(199, 85%, 36%);
   }
+
   #youtube:hover {
     color: red;
   }
 }
+
 
 @media only screen and (min-width: 768px) {
   .banner-content {
