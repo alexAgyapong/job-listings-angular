@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Category } from '../shared/models/job';
 import { tap } from 'rxjs/operators';
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { SharedService } from './../shared/services/shared.service';
 
 
 @Component({
@@ -17,13 +19,16 @@ export class HomeComponent implements OnInit {
   jobTags = ['engineering-jobs', 'graduate-jobs', 'it-jobs', 'healthcare-nursing-jobs'];
   sectors: Category[];
   year = new Date().getFullYear();
+  isTablet: boolean = false;
 
-  constructor(private listingsService: ListingsService, private geocodeService: GeocodeService) { }
+  constructor(private listingsService: ListingsService, private geocodeService: GeocodeService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
     // this.listingsService.getListings().subscribe(res => console.log({ res }));
     this.getCurrentLocation();
     this.getCategories();
+    this.isTablet = this.sharedService.isTabletBreakPoint();
+
   }
 
   private getCategories(): void {

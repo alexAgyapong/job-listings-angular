@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { SharedService } from './../../shared/services/shared.service';
 
 @Component({
   selector: 'app-job-list',
@@ -22,8 +23,8 @@ export class JobListComponent implements OnInit, AfterViewInit {
   req: JobRequestOptions;
   categories$: Observable<Category[]>;
   searchForm: FormGroup;
-  maxPageSize = 15;
-  itemsPerPage = 20;
+  maxPageSize: number;
+  itemsPerPage: number = 20;
   @ViewChild('jobs') jobsTarget: ElementRef;
 
   modalRef: BsModalRef;
@@ -32,10 +33,12 @@ export class JobListComponent implements OnInit, AfterViewInit {
   shortListed: Job[] = [];
   isFiltersCleared: boolean;
   selectedCategoryTag: string;
+
   constructor(private listingsService: ListingsService, private fb: FormBuilder,
-    private route: ActivatedRoute, private modalService: BsModalService) { }
+    private route: ActivatedRoute, private modalService: BsModalService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.isTabletBreakPoint() ? this.maxPageSize = 15 : this.maxPageSize = 5;
 
     this.route.queryParamMap.subscribe(params => {
       const what = params.get('what');

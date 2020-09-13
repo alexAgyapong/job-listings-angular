@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    LayoutModule,
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     FontAwesomeModule,
