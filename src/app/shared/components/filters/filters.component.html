@@ -28,11 +28,11 @@
     <section class="pt-3 mb-3">
       <h6>Job type</h6>
       <div *ngFor="let type of jobTypes">
-        <div class="custom-control custom-radio pb-2">
+        <label class="custom-control custom-radio pb-2">
           <input type="radio" class="custom-control-input" [value]="type?.value"  [id]="type?.value"
           formControlName="jobType"  >
-          <label class="custom-control-label" [attr.for]="type?.value">{{type?.name}}</label>
-        </div>
+          <span class="custom-control-label" [attr.for]="type?.value">{{type?.name}}</span>
+        </label>
       </div>
     </section>
     <section class="pt-3  mb-3">
@@ -45,11 +45,11 @@
     <section class="pt-3">
       <h6>Categories</h6>
       <div *ngFor="let category of categories">
-        <div class="custom-control custom-radio pb-2">
+        <label class="custom-control custom-radio pb-2">
           <input type="radio" class="custom-control-input" [value]="category?.tag" [id]="category?.tag"
             formControlName="category" (change)="onCategoryChange(category?.tag)">
-          <label class="custom-control-label" [attr.for]="category?.tag">{{category?.label}}</label>
-        </div>
+          <span class="custom-control-label" [attr.for]="category?.tag">{{category?.label}}</span>
+        </label>
       </div>
     </section>
   </form>
