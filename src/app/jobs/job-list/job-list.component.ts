@@ -34,11 +34,14 @@ export class JobListComponent implements OnInit, AfterViewInit {
   isFiltersCleared: boolean;
   selectedCategoryTag: string;
 
+  get hasParams(): boolean {
+    return !!(this.req.category || this.req.what);
+  }
   constructor(private listingsService: ListingsService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private modalService: BsModalService,
-              private sharedService: SharedService) { }
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.sharedService.isTabletBreakPoint() ? this.maxPageSize = 15 : this.maxPageSize = 5;
