@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Job } from '../../models/job';
 import { faCoffee, faHeart } from '@fortawesome/free-solid-svg-icons';
-
+import { differenceInDays, parseISO, subDays, format } from 'date-fns';
 @Component({
   selector: 'app-job-card',
   templateUrl: './job-card.component.html',
@@ -17,6 +17,7 @@ export class JobCardComponent implements OnInit, OnChanges {
   faHeart = faHeart;
   isShortListed = false;
   shortListed: Job[] = [];
+  postedStatus: string;
 
   constructor() { }
 
@@ -27,6 +28,7 @@ export class JobCardComponent implements OnInit, OnChanges {
     // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     // Add '${implements OnChanges}' to the class.
     this.job.isShortListed ? this.isShortListed = true : this.isShortListed = false;
+    this.setDatePostedStatus(this.job.created.toString());
   }
 
   public getSelectedFilter(event: string): void {
@@ -48,5 +50,12 @@ export class JobCardComponent implements OnInit, OnChanges {
 
     console.log('short list', { job }, 'shortlisted removed', this.shortListed);
 
+  }
+
+  setDatePostedStatus(date: string): void {
+    const duration = differenceInDays(new Date(), parseISO(date));
+    if (duration < 7) {
+      this.postedStatus = duration === 0 ? 'Today' : `${duration} days ago`;
+    } else { this.postedStatus = format(new Date(date), 'dd MMMM'); }
   }
 }
