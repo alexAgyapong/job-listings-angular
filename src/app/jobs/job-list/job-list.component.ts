@@ -121,7 +121,6 @@ export class JobListComponent implements OnInit, AfterViewInit {
     this.getJobTypeParams(filter, this.req);
     this.getJobs(this.req);
     this.scroll(this.jobsTarget.nativeElement);
-
   }
 
   showModal(template: TemplateRef<any>): void {

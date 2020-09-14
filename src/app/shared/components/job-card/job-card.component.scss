@@ -1,3 +1,7 @@
+:host{
+  --adwuma-secondary:hsl(333, 100%, 62%);
+}
+
 a,
 a:active,
 a:visited {
@@ -24,6 +28,10 @@ fa-icon{
   }
 }
 
+.badge-bg{
+  background-color: var(--adwuma-secondary);
+  cursor: pointer;
+}
 @media only screen and (min-width:768px){
   .fav-icon {
     position: absolute;
