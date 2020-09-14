@@ -1,8 +1,9 @@
 <div class="position-relative">
   <div class="card my-3 m-sm-3 p-3 text-dark">
-    <p class="card-text ">{{job?.company?.display_name|removeHtmlTags}}</p>
     <a class="card-text pb-3" [href]="job?.redirect_url" target="_blank"
-      rel="noopener noreferrer">{{job?.title|removeHtmlTags}}</a>
+      rel="noopener noreferrer">{{job?.title|removeHtmlTags}}
+    </a>
+    <p *ngIf="job?.company?.display_name" class="card-text ">Posted by {{job?.company?.display_name|removeHtmlTags}}</p>
     <span class="d-flex justify-content-between mr-1">
       <span class="card-text">{{job?.salary_min|currency:'GBP' : 'symbol' : '1.0-0' }} -
         {{job?.salary_max|currency:'GBP': 'symbol' : '1.0-0'}}
