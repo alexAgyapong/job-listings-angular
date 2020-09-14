@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
   jobTags = ['engineering-jobs', 'graduate-jobs', 'it-jobs', 'healthcare-nursing-jobs'];
   sectors: Category[];
   year = new Date().getFullYear();
-  isTablet: boolean = false;
+  isTablet = false;
+  userLocation: string;
 
   constructor(private listingsService: ListingsService, private geocodeService: GeocodeService, private sharedService: SharedService) { }
 
@@ -37,8 +38,6 @@ export class HomeComponent implements OnInit {
 
   getSectors(data: Category[]): void {
     this.sectors = data.filter(x => this.jobTags.includes(x.tag));
-    console.log({ data }, 'for selectors');
-
   }
 
   getCurrentLocation(): any {
@@ -50,7 +49,7 @@ export class HomeComponent implements OnInit {
             latitude: loc.coords.latitude,
             longitude: loc.coords.longitude,
           };
-          // this.geocodeService.getLocation(req).subscribe((res) => console.log({ res }));
+          this.geocodeService.getLocation(req).subscribe((res) => { console.log({ res }, res?.city); this.userLocation = res?.city; });
         }
       }, () => console.log('rerror'));
     }

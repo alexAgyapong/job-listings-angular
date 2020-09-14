@@ -11,7 +11,7 @@ export class GeocodeService {
   constructor(private http: HttpClient) { }
 
   getLocation(coords: { latitude: number, longitude: number }): Observable<any> {
-    const params = new HttpParams().set('auth', environment.geocodeXYZApiKey);
+    const params = new HttpParams().set('auth', environment.geocodeXYZApiKey).set('json', '1');
     const url = `${environment.geocodeXYZBaseURL}/${coords.latitude},${coords.longitude}`;
     return this.http.get<any>(url, { params });
   }
