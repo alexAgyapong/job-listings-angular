@@ -29,7 +29,7 @@
         <app-job-card [job]="job" (filter)="getSelectedFilter($event)" (addedToShortList)="updateShortListed($event)"
           (removedFromShortList)="updateRemovedShortListed($event)"></app-job-card>
       </div>
-      <ng-container *ngIf="resultCount">
+      <ng-container *ngIf="!isLoading">
         <pagination class="ml-3" [totalItems]="resultCount" [maxSize]="maxPageSize" [itemsPerPage]="itemsPerPage"
           (pageChanged)="pageChanged($event)" (click)="scroll(jobs)">
         </pagination>

@@ -33,15 +33,16 @@ export class JobListComponent implements OnInit, AfterViewInit {
   shortListed: Job[] = [];
   isFiltersCleared: boolean;
   selectedCategoryTag: string;
+  isLoading = false;
 
   get hasParams(): boolean {
     return !!(this.req.category || this.req.what);
   }
   constructor(private listingsService: ListingsService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private modalService: BsModalService,
-    private sharedService: SharedService) { }
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private modalService: BsModalService,
+              private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.sharedService.isTabletBreakPoint() ? this.maxPageSize = 15 : this.maxPageSize = 5;
@@ -66,8 +67,9 @@ export class JobListComponent implements OnInit, AfterViewInit {
   }
 
   private getJobs(req: JobRequestOptions, page?: number): void {
+    this.isLoading = true;
     this.jobs$ = this.listingsService.getListings(req, page)
-      .pipe(tap(data => this.resultCount = data.count),
+      .pipe(tap(data => { this.resultCount = data.count; this.isLoading = false; }),
         map(res => res.results),
         tap(data => this.setShortListedFlag(data))
       );
