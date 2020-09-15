@@ -1,7 +1,7 @@
 <div class="position-relative">
   <div class="card my-3 m-sm-3 p-3 text-dark">
-    <a class="card-text" [href]="job?.redirect_url" target="_blank"
-      rel="noopener noreferrer"><h5>{{job?.title|removeHtmlTags}}</h5>
+    <a class="card-text w-title" [href]="job?.redirect_url" target="_blank"
+      rel="noopener noreferrer"><h3>{{job?.title|removeHtmlTags}}</h3>
     </a>
     <p *ngIf="job?.company?.display_name" class="card-text">Posted {{postedStatus}} by
       {{job?.company?.display_name|removeHtmlTags}}</p>
