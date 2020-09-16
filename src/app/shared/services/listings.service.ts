@@ -14,9 +14,6 @@ export class ListingsService {
 
   getListings(req?: JobRequestOptions, page: number = 1): Observable<JobResponse> {
     const options = this.appendParams(req);
-    // options.set('where', req?.where);
-    console.log({ options });
-
     const url = `${environment.baseURL}/jobs/gb/search/${page}`;
     return this.http.get<JobResponse>(url, { params: options });
   }
