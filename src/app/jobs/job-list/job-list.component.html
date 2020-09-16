@@ -8,12 +8,15 @@
       placeholder="Job title or keywords ....." autocomplete="off" (click)="showModal(searchTemplate)">
   </div>
   <div class="row">
-    <span *ngIf="resultCount" class="col-12 mt-3">
+    <span *ngIf="resultCount && !isLoading" class="col-12 mt-3">
       <h5>{{resultCount}}
         <ng-container *ngIf="hasParams else noParams">
-          {{req?.what|titlecase}}
-          Jobs in
-          {{(req?.where||req?.category|removeHyphen)|titlecase}}
+          <span *ngIf="req?.what || req?.where">
+            {{req?.what|titlecase}}
+            Jobs in
+            {{req?.where|titlecase}}
+          </span>
+          <span *ngIf="req?.category"> {{req?.category|removeHyphen|titlecase}}</span>
         </ng-container>
       </h5>
       <ng-template #noParams>Jobs & Vacancies</ng-template>
@@ -51,7 +54,8 @@
   <div *ngIf="req?.where">
     <p class="font-weight-bold mb-0">You may want to try:</p>
     <ul>
-      <li> <a role="button" class="text-primary" [routerLink]="['/jobs']" [queryParams]="{where:req?.where}"  >jobs in {{req?.where}}</a></li>
+      <li> <a role="button" class="text-primary" [routerLink]="['/jobs']" [queryParams]="{where:req?.where}">jobs in
+          {{req?.where}}</a></li>
     </ul>
   </div>
   <span class="font-weight-bold"> Search suggestions:</span>
