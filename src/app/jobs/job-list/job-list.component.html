@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="d-none d-sm-block mt-sm-5">
     <app-search></app-search>
   </div>
@@ -25,11 +26,16 @@
     <div *ngIf="resultCount" class="d-block d-sm-none mt-2 mx-auto"><button class="btn-link btn-outline-none"
         (click)="showFilters(filtersTemplate)">Filters</button></div>
     <div class="col-sm-9" #jobs>
-      <div *ngFor="let job of jobs$|async">
-        <app-job-card [job]="job" (filter)="getSelectedFilter($event)" (addedToShortList)="updateShortListed($event)"
-          (removedFromShortList)="updateRemovedShortListed($event)"></app-job-card>
-      </div>
-      <ng-container *ngIf="!isLoading">
+      <ng-container *ngIf="jobs$|async as jobs ">
+        <ng-container *ngIf="jobs?.length else noResultsFound">
+          <div *ngFor="let job of jobs">
+            <app-job-card [job]="job" (filter)="getSelectedFilter($event)"
+              (addedToShortList)="updateShortListed($event)" (removedFromShortList)="updateRemovedShortListed($event)">
+            </app-job-card>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!isLoading && resultCount">
         <pagination class="ml-3" [totalItems]="resultCount" [maxSize]="maxPageSize" [itemsPerPage]="itemsPerPage"
           (pageChanged)="pageChanged($event)" (click)="scroll(jobs)">
         </pagination>
@@ -38,6 +44,25 @@
   </div>
 </div>
 
+<!-- No jobs found -->
+<ng-template #noResultsFound>
+  <h5 class="pt-3">No jobs found</h5>
+  <p>Your search for{{req?.what}} in {{req?.where}} didn't match any jobs.</p>
+  <div *ngIf="req?.where">
+    <p class="font-weight-bold mb-0">You may want to try:</p>
+    <ul>
+      <li> <a role="button" class="text-primary" [routerLink]="['/jobs']" [queryParams]="{where:req?.where}"  >jobs in {{req?.where}}</a></li>
+    </ul>
+  </div>
+  <span class="font-weight-bold"> Search suggestions:</span>
+  <ul>
+    <li>Check the spelling of search terms</li>
+    <li>Try alternative terms</li>
+    <li>Adjust the filters to broaden your search</li>
+  </ul>
+</ng-template>
+
+<!-- Template for search modal dialog -->
 <ng-template #searchTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Search</h4>
@@ -50,6 +75,7 @@
   </div>
 </ng-template>
 
+<!-- Template for filters modal dialog -->
 <ng-template #filtersTemplate>
   <div class="modal-header bg-light sticky-top">
     <h4 class="modal-title pull-left" (click)="clearFilters()">Filters</h4>

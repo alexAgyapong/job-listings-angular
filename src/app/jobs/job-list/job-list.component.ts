@@ -39,10 +39,10 @@ export class JobListComponent implements OnInit, AfterViewInit {
     return !!(this.req.category || this.req.what);
   }
   constructor(private listingsService: ListingsService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private modalService: BsModalService,
-              private sharedService: SharedService) { }
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.sharedService.isTabletBreakPoint() ? this.maxPageSize = 15 : this.maxPageSize = 5;
@@ -83,20 +83,17 @@ export class JobListComponent implements OnInit, AfterViewInit {
         jobs.forEach(x => {
           if (j.id === x.id) {
             x.isShortListed = true;
-            console.log('set....', { x }, { j });
           }
         });
       });
     }
-    console.log({ jobs }, 'flags set');
-
   }
+
   private getCategories(): void {
     this.categories$ = this.listingsService.getCategories();
   }
 
   getAllFilters(filters: any): void {
-    console.log('local req', this.req, 'filters from child', filters);
 
     if (filters) {
       const req = { ...this.req, ...filters } as JobRequestOptions;
@@ -119,19 +116,16 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
 
   getSelectedFilter(filter: string): void {
-    console.log({ filter });
     this.getJobTypeParams(filter, this.req);
     this.getJobs(this.req);
     this.scroll(this.jobsTarget.nativeElement);
   }
 
   showModal(template: TemplateRef<any>): void {
-    console.log('search clicked');
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-width' }));
   }
 
   showFilters(template: TemplateRef<any>): void {
-    console.log('search clicked');
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'modal-width' }));
   }
 
