@@ -13,7 +13,7 @@
         <ng-container *ngIf="hasParams else noParams">
           {{req?.what|titlecase}}
           Jobs in
-          {{req?.where|titlecase}}
+          {{(req?.where||req?.category|removeHyphen)|titlecase}}
         </ng-container>
       </h5>
       <ng-template #noParams>Jobs & Vacancies</ng-template>

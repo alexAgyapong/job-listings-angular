@@ -28,6 +28,7 @@ import {
   AmazonLoginProvider,
 } from 'angularx-social-login';
 import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
+import { RemoveHyphenPipe } from './shared/pipes/remove-hyphen.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ShortlistComponent } from './jobs/shortlist/shortlist.component';
     FiltersComponent,
     SearchComponent,
     ShortlistComponent,
+    RemoveHyphenPipe,
   ],
   imports: [
     BrowserModule,
