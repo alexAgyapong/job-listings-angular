@@ -21,6 +21,8 @@ export class FiltersComponent implements OnInit, OnChanges {
   jobType: { name: string; value: string; };
   jobTypeValues: number[] = [];
   categoryValues: string[] = [];
+  minSalaries: { name: string; value: number; }[];
+  maxSalaries: { name: string; value: number; }[];
 
   get jobTypesControl(): FormControl {
     return this.filterForm.get('jobType') as FormControl;
@@ -108,18 +110,19 @@ export class FiltersComponent implements OnInit, OnChanges {
     const minLow = 10000;
     const maxLow = 50000;
     for (let index = minLow; index <= maxLow; index += 2000) {
-      result.push({ name: `£${index}`, value: index });
+      result.push({ name: `${index}`, value: index });
     }
 
     const minHigh = 55000;
     const maxHigh = 100000;
     for (let index = minHigh; index <= maxHigh; index += 5000) {
-      result.push({ name: `£${index}`, value: index });
+      result.push({ name: `${index}`, value: index });
     }
 
     console.log({ result });
     this.salaries = result;
-
+    this.minSalaries = result;
+    this.maxSalaries = result;
   }
 
   getJobTypes(): void {
@@ -138,5 +141,38 @@ export class FiltersComponent implements OnInit, OnChanges {
       { name: 'Last Week', value: 7 },
       { name: 'Last two Weeks', value: 14 },
     ];
+  }
+
+  resetSalaries(type: string): void {
+    switch (type) {
+      case 'min':
+        this.minSalaries = this.salaries;
+        this.filterForm.get('minSalary').setValue('0');
+        break;
+
+      case 'max':
+        this.maxSalaries = this.salaries;
+        this.filterForm.get('maxSalary').setValue('0');
+        break;
+    }
+  }
+
+  onSalarySelected(type: string): void {
+    console.log({ type });
+    switch (type) {
+      case 'min':
+        const selectedMinSalary = +this.filterForm.get('minSalary').value;
+        this.maxSalaries = this.maxSalaries.filter(s => s.value > selectedMinSalary);
+        console.log('max sal', this.maxSalaries);
+
+        break;
+
+      case 'max':
+        const selectedMaxSalary = +this.filterForm.get('maxSalary').value;
+        this.minSalaries = this.minSalaries.filter(s => s.value < selectedMaxSalary);
+        console.log('max sal', this.minSalaries);
+
+        break;
+    }
   }
 }

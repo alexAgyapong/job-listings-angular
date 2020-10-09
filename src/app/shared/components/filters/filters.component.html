@@ -7,21 +7,27 @@
         <option *ngFor="let item of distancesInKm" [value]="item?.value">{{item?.name}}</option>
       </select>
     </section>
-   <!-- <div class="pt-3"> <hr/></div> -->
+    <!-- <div class="pt-3"> <hr/></div> -->
     <div class="py-3">
       <h6>Salary range</h6>
       <section class="pt-3">
-        <h6>From</h6>
-        <select class="custom-select" formControlName="minSalary">
+        <!-- <span class="d-flex justify-content-between border border-danger">
+          <h6>From</h6> <button class="btn btn-linkborder border-success">Clear</button>
+        </span> -->
+        <h6 class="d-flex justify-content-between border border-danger">From <a role="button" class="clear-salary" (click)="resetSalaries('min')">Clear</a></h6>
+        <select class="custom-select" formControlName="minSalary" (change)="onSalarySelected('min')">
           <option selected value="0">£ Any</option>
-          <option *ngFor="let item of salaries" [value]="item?.value">{{item?.name}}</option>
+          <option *ngFor="let item of minSalaries" [value]="item?.value">
+            {{item?.name|currency:'GBP': 'symbol' : '1.0-0'}}</option>
         </select>
       </section>
       <section class="pt-3">
-        <h6>To</h6>
-        <select class="custom-select" formControlName="maxSalary">
+        <!-- <h6>To</h6> -->
+        <h6 class="d-flex justify-content-between">To <a role="button" (click)="resetSalaries('max')">Clear</a></h6>
+        <select class="custom-select" formControlName="maxSalary" (change)="onSalarySelected('max')">
           <option selected value="0">£ Any</option>
-          <option *ngFor="let item of salaries" [value]="item?.value">{{item?.name}}</option>
+          <option *ngFor="let item of maxSalaries" [value]="item?.value">
+            {{item?.name|currency:'GBP': 'symbol' : '1.0-0'}}</option>
         </select>
       </section>
     </div>
@@ -29,8 +35,8 @@
       <h6>Job type</h6>
       <div *ngFor="let type of jobTypes">
         <label class="custom-control custom-radio pb-2">
-          <input type="radio" class="custom-control-input" [value]="type?.value"  [id]="type?.value"
-          formControlName="jobType"  >
+          <input type="radio" class="custom-control-input" [value]="type?.value" [id]="type?.value"
+            formControlName="jobType">
           <span class="custom-control-label" [attr.for]="type?.value">{{type?.name}}</span>
         </label>
       </div>
