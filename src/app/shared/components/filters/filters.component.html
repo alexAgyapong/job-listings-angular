@@ -14,7 +14,7 @@
         <!-- <span class="d-flex justify-content-between border border-danger">
           <h6>From</h6> <button class="btn btn-linkborder border-success">Clear</button>
         </span> -->
-        <h6 class="d-flex justify-content-between border border-danger">From <a role="button" class="clear-salary" (click)="resetSalaries('min')">Clear</a></h6>
+        <h6 class="d-flex justify-content-between">From <a role="button" class="clear-salary" (click)="resetSalaries('min')">Clear</a></h6>
         <select class="custom-select" formControlName="minSalary" (change)="onSalarySelected('min')">
           <option selected value="0">£ Any</option>
           <option *ngFor="let item of minSalaries" [value]="item?.value">
@@ -23,7 +23,7 @@
       </section>
       <section class="pt-3">
         <!-- <h6>To</h6> -->
-        <h6 class="d-flex justify-content-between">To <a role="button" (click)="resetSalaries('max')">Clear</a></h6>
+        <h6 class="d-flex justify-content-between">To <a role="button" class="clear-salary" (click)="resetSalaries('max')">Clear</a></h6>
         <select class="custom-select" formControlName="maxSalary" (change)="onSalarySelected('max')">
           <option selected value="0">£ Any</option>
           <option *ngFor="let item of maxSalaries" [value]="item?.value">

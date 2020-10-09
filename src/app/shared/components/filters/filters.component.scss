@@ -1,6 +1,9 @@
-.clear-salary{
-  // font-size: .8rem;
-  // color: red;
-  // margin-bottom: 0;
-  // border: 1px solid blueviolet;
+.clear-salary {
+  &:active,
+  &:visited,
+  &:hover,
+  &:focus {
+    text-decoration: underline !important;
+    color: #007bff !important;
+  }
 }
