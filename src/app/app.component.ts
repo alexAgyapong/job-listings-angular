@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SocialAuthService, GoogleLoginProvider, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'job-listings-angular';
   user: SocialUser;
   loggedIn: boolean;
+  faUser = faUser;
 
   modalRef: BsModalRef;
   userDetailsModalRef: BsModalRef;
